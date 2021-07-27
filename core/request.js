@@ -1,27 +1,39 @@
-module.exports=class Request{
-    constructor(){
-    }
-    static getInstance(){
-        if(!Request.instance){
-            Request.instance=new Request();
+
+const url = require('url');
+const querystring = require('querystring');
+module.exports = class Request {
+
+    static GetInstance() {
+        if (!Request.instance) {
+            Request.instance = new Request();
         }
         return Request.instance;
     }
-    get getController(){
-        return this.controllername;
+    GetController() {
+        return this.controllerName;
     }
-    get getAction(){
-        return this.action;
+    GetAction() {
+        return this.actionName;
     }
-    set setController(name){
-        this.controllername=name;
-    }
-    set setAction(action){
-        this.action=action;
+
+    InitialiseRequest(req, CallBack) {
+        let body = [];
+        if (req.method == 'POST') {
+            req.on('data', function (chunk) {
+                body.push(chunk);
+            });
+            req.on('end', () => {
+                //getting request body for setting parameters
+                body = Buffer.concat(body).toString();
+                const paramsName = querystring.parse(body);
+                //getting headers
+                var queryobj = url.parse(req.url, true).query;
+                this.controllerName = queryobj.controller;
+                this.actionName = queryobj.action;
+                this.params = paramsName;
+                CallBack();
+            });
+        }
+
     }
 }
-//const singletonInstance=new Request();
-//Object.freeze(singletonInstance);
-//export default singletonInstance;
-//module.exports=singletonInstance;
-
