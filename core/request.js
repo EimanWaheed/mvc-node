@@ -56,7 +56,7 @@ module.exports = class Request {
             body = Buffer.concat(body).toString();
             const paramsName = queryString.parse(body);
             /** Get request headers to set parameters. */
-            var queryObject = url.parse(req.url, true).query;
+            let queryObject = url.parse(req.url, true).query;
             this.controllerName = queryObject.controller;
             this.actionName = queryObject.action;
             this.params = paramsName;

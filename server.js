@@ -1,8 +1,8 @@
 const request = require('/home/eiman.waheed/Desktop/mvc-node/core/request.js');
 const appObject = require('/home/eiman.waheed/Desktop/mvc-node/public/app.js');
-var url = require('url');
-var fs = require('fs');
-var http = require('http');
+let url = require('url');
+let fs = require('fs');
+let http = require('http');
 
 /** 
  * Creates local HTTP server and it is a single entry point.
