@@ -1,9 +1,10 @@
-const request = require('/home/eiman.waheed/Desktop/mvc-node/core/request.js');
-const appObject = require('/home/eiman.waheed/Desktop/mvc-node/public/app.js');
+const pathfile = require('./config');
+const request = require(`${process.env.FILEPATH}/core/request.js`);
+const appObject = require(`${process.env.FILEPATH}/public/app.js`);
+//const request = require('/home/eiman.waheed/Desktop/mvc-node/core/request.js');
 let url = require('url');
 let fs = require('fs');
 let http = require('http');
-
 /** 
  * Creates local HTTP server and it is a single entry point.
  * @param {string} req
@@ -19,9 +20,23 @@ http.createServer(function (req, res) {
     console.log(requestInstance);
     /** Running app object. */
     appObject.runApp();
-    res.write('123'.toString());
-    res.end();
+
+    /** Fetching the form data. */
+    fs.readFile("/home/eiman.waheed/Desktop/mvc-node/app/views/student/create.html", function (error, pgResp) {
+      if (error) {
+        res.writeHead(404);
+        res.write('Contents you are looking are Not Found');
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(pgResp);
+      }
+
+      res.end();
+
+    });
+    //res.write('123'.toString());
+    //res.end();
   });
-
-
+  
 }).listen(3000);
+
