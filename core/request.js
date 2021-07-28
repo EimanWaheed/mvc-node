@@ -1,18 +1,9 @@
-/** 
- * Url module.
- * @module url 
- */
 const url = require('url');
-/** 
- * Querystring module.
- * @module querystring 
- */
 const queryString = require('querystring');
-/**
- * @module request/instance
- */
 
-/** Class representing the request. */
+/** Class representing the request, for the purpose of setting the request object fetched from client.
+This class is responsible for parsing the URL and setting the parameters of controller, action and form data. 
+The instance of this class is made singleton using Singleton Design Pattern. */
 module.exports = class Request {
 
     /**
@@ -40,6 +31,14 @@ module.exports = class Request {
      */
     getAction() {
         return this.actionName;
+    }
+
+     /**
+     * Get the params object.
+     * @return {object} The params object.
+     */
+    getParams() {
+        return this.params;
     }
 
     /**
