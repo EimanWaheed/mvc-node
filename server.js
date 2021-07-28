@@ -1,35 +1,35 @@
-///home/eiman.waheed/Desktop/mvc-node/app/views/student
-var fs = require('fs');
-
-var http = require('http');
-const Request = require('/home/eiman.waheed/Desktop/mvc-node/core/request.js');
+/** Import Request class for getting request instance. */
+const request = require('/home/eiman.waheed/Desktop/mvc-node/core/request.js');
+/** Import App function for running the dispatcher. */
+const appObject = require('/home/eiman.waheed/Desktop/mvc-node/public/app.js');
+/** 
+ * Url module.
+ * @module url
+ */
 var url = require('url');
-const appObj = require('/home/eiman.waheed/Desktop/mvc-node/public/app.js');
+/**
+ * File system module.
+ * @module fs
+ */
+var fs = require('fs');
+/**
+ * HTTP module.
+ * @module http
+ */
+var http = require('http');
+
+/** Creates HTTP local server. */
 http.createServer(function (req, res) {
 
-  //setting to the request class
+  /** Setting request instance. */
   console.log("singleton object printed");
-  requestInstance = Request.GetInstance();
-  requestInstance.InitialiseRequest(req, () => {
+  requestInstance = request.getInstance();
+  requestInstance.initialiseRequest(req, () => {
 
     console.log(requestInstance);
-    //calling app file function 
-    appObj.runApp();
-
-    //reading file
-    fs.readFile("/home/eiman.waheed/Desktop/mvc-node/app/views/student/create.html", function (error, pgResp) {
-      if (error) {
-        res.writeHead(404);
-        res.write('Contents you are looking are Not Found');
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(pgResp);
-      }
-
-      res.end();
-
-    });
-
+    /** Running app object. */
+    appObject.runApp();
+    res.write('123');
+    res.end();
   });
-
-}).listen(8080);
+}).listen(3000);
