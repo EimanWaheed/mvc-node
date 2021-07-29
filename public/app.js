@@ -1,11 +1,9 @@
-const dispatcher=require('/home/eiman.waheed/Desktop/mvc-node/core/dispatcher.js');
-
-//calling dispatcher
-function runApp(){
-    //console.log('App is invoked');
-    dispatcher.Dispatch();
+const dispatcher=require(`${process.env.FILEPATH}/core/dispatcher.js`);
+/** Class representing running application from single entry point. */
+module.exports=class ApplicationRun{
+    runApp(){
+        console.log('App is invoked');
+        const dispatchReq=new dispatcher();
+        dispatchReq.dispatchRequest();
+    }
 }
-
-module.exports={
-    runApp
-};

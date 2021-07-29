@@ -1,10 +1,4 @@
-const pathfile = require('./config');
-const request = require(`${process.env.FILEPATH}/core/request.js`);
-const appObject = require(`${process.env.FILEPATH}/public/app.js`);
-//const request = require('/home/eiman.waheed/Desktop/mvc-node/core/request.js');
-let url = require('url');
-let fs = require('fs');
-let http = require('http');
+const http = require('http');
 /** 
  * Creates local HTTP server and it is a single entry point.
  * @param {string} req
@@ -12,14 +6,20 @@ let http = require('http');
  */
 http.createServer(function (req, res) {
 
+  require('./config');
+  const request = require(`${process.env.FILEPATH}/core/request.js`);
+  const appObject = require(`${process.env.FILEPATH}/public/app.js`);
+  const url = require('url');
+  const fs = require('fs');
+
   /** Setting request instance. */
-  //console.log("singleton object printed");
   requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
 
     console.log(requestInstance);
     /** Running app object. */
-    appObject.runApp();
+    const appStart = new appObject();
+    appStart.runApp();
 
     /** Fetching the form data. */
     fs.readFile("/home/eiman.waheed/Desktop/mvc-node/app/views/student/create.html", function (error, pgResp) {
@@ -34,9 +34,8 @@ http.createServer(function (req, res) {
       res.end();
 
     });
-    //res.write('123'.toString());
-    //res.end();
+
   });
-  
+
 }).listen(3000);
 
