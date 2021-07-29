@@ -1,16 +1,18 @@
-const http = require('http');
+require('./config');
+const autoload=require(`${process.env.FILEPATH}/core/autoload.js`);
+const http=autoload.autoload('http');
 /** 
  * Creates local HTTP server and it is a single entry point.
  * @param {string} req
  * @param {string} res
  */
 http.createServer(function (req, res) {
-
-  require('./config');
-  const request = require(`${process.env.FILEPATH}/core/request.js`);
-  const appObject = require(`${process.env.FILEPATH}/public/app.js`);
-  const url = require('url');
-  const fs = require('fs');
+  
+  /** Acquire modules. */
+  const request = autoload.autoload('request');
+  const appObject = autoload.autoload('appObject');
+  const url = autoload.autoload('url');
+  const fs = autoload.autoload('fs');
 
   /** Setting request instance. */
   requestInstance = request.getInstance();

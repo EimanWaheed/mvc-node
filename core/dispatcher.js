@@ -1,8 +1,13 @@
-const request = require('./request.js');
-const controller = require(`${process.env.FILEPATH}/core/controllers/controllerFactory.js`);
 /** Class representing dispatcher which is responsbible for invoking Controller. */
 module.exports = class Dispatcher {
+
+    /** Fetches the targetted controller. */
     dispatchRequest() {
+
+        /** Acquiring modules. */
+        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+        const request = autoload.autoload('request');
+        const controller = autoload.autoload('controller');
         console.log("Dispatcher is invoked")
         let controllerObj = "";
         requestInstance = request.getInstance();

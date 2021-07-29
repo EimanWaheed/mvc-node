@@ -1,5 +1,8 @@
-const request = require(`${process.env.FILEPATH}/core/request.js`);
-const modelObject = require(`${process.env.FILEPATH}/core/models/modelFactory.js`);
+/** Acquiring the modules. */
+const autoload=require(`${process.env.FILEPATH}/core/autoload.js`);
+const request=autoload.autoload('request');
+const modelObject = autoload.autoload('modelObject');
+
 /** Class representing CRUD operations. */
 module.exports = class RestController {
     create() {

@@ -1,6 +1,3 @@
-const url = require('url');
-const queryString = require('querystring');
-
 /** Class representing the request, for the purpose of setting the request object fetched from client.
 This class is responsible for parsing the URL and setting the parameters of controller, action and form data. 
 The instance of this class is made singleton using Singleton Design Pattern. */
@@ -33,10 +30,10 @@ module.exports = class Request {
         return this.actionName;
     }
 
-     /**
-     * Get the params object.
-     * @return {object} The params object.
-     */
+    /**
+    * Get the params object.
+    * @return {object} The params object.
+    */
     getParams() {
         return this.params;
     }
@@ -47,6 +44,12 @@ module.exports = class Request {
      * @param {callBack} callBack 
      */
     initialiseRequest(req, callBack) {
+
+        /** Acquiring the modules. */
+        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+        const url = autoload.autoload('url');
+        const queryString = autoload.autoload('querystring');
+
         let body = [];
         req.on('data', function (chunk) {
             body.push(chunk);
