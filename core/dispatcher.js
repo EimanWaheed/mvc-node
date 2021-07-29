@@ -3,10 +3,8 @@ const controller = require(`${process.env.FILEPATH}/core/controllers/controllerF
 function Dispatch() {
     console.log("Dispatcher is invoked")
     requestInstance = request.getInstance();
-    console.log(requestInstance.controllerName);
     controllerObj = controller.createController(requestInstance.controllerName);
-    console.log("Controller object is");
-    console.log(controllerObj);
+    controllerObj.performAction(requestInstance.actionName);
 }
 module.exports = {
     Dispatch

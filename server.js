@@ -13,7 +13,7 @@ let http = require('http');
 http.createServer(function (req, res) {
 
   /** Setting request instance. */
-  console.log("singleton object printed");
+  //console.log("singleton object printed");
   requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
 

@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "domino": "^2.1.6",
     "nodemon": "^2.0.12"
   },
   "devDependencies": {}
