@@ -47,8 +47,8 @@ module.exports = class Request {
 
         /** Acquiring the modules. */
         const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-        const url = autoload.autoload('url');
-        const queryString = autoload.autoload('querystring');
+        const url = require('url');
+        const queryString = require('querystring');
 
         let body = [];
         req.on('data', function (chunk) {

@@ -1,13 +1,18 @@
 /** Acquiring the modules. */
-const autoload=require(`${process.env.FILEPATH}/core/autoload.js`);
-const request=autoload.autoload('request');
-const modelObject = autoload.autoload('modelObject');
-
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const request = autoload('request');
+const createModel = autoload('modelObject');
+const viewManager = autoload('viewManager');
+let requestInstance = request.getInstance();
 /** Class representing CRUD operations. */
 module.exports = class RestController {
+
+    /** Initialises the model object specified in the request. */
     create() {
+        let modelObj = "";
         console.log("create() is called");
-        //modelObject.createModel();
+        modelObj = createModel(requestInstance.controllerName);
+        modelObj.create();
     }
     update() {
         console.log("update() is called");
@@ -18,10 +23,23 @@ module.exports = class RestController {
     delete() {
         console.log("delete() is called");
     }
-    performAction(actionName) {
+    loadDefault() {
+        console.log("DefaultViewLoader() called");
+        /** View Manager is called. */
+        if (!requestInstance.controllerName) { //for handling undefined case, views->default->defaultView
+            viewManager.viewManager('default', 'defaultView');
+        } else {
+            viewManager.viewManager(requestInstance.controllerName, requestInstance.actionName);
+        }
+    }
+    /** Dynamically calls the action specified in the request. */
+    performAction() {
         console.log("performAction() is called");
-        /** Dyanmic function call for action specified in request. */
-        this[actionName]();
+        if (requestInstance.actionName) {
+            this[requestInstance.actionName]();
+        } else {
+            return this.loadDefault();
+        }
     }
 
 }

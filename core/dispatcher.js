@@ -6,17 +6,18 @@ module.exports = class Dispatcher {
 
         /** Acquiring modules. */
         const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-        const request = autoload.autoload('request');
-        const controller = autoload.autoload('controller');
-        console.log("Dispatcher is invoked")
+        const request = autoload('request');
+        const createController = autoload('controller');
+        let requestInstance = request.getInstance();
         let controllerObj = "";
-        requestInstance = request.getInstance();
+
         /** Check the availibility of controller. */
         if (requestInstance.controllerName) {
-            controllerObj = controller.createController(requestInstance.controllerName);
-            controllerObj.performAction(requestInstance.actionName);
+            controllerObj = createController(requestInstance.controllerName);
+            controllerObj.performAction();
         } else {
-            controllerObj = new (require(`${process.env.FILEPATH}/app/controllers/defaultController.js`));
+            controllerObj = createController('default');
+            controllerObj.performAction();
         }
     }
 }

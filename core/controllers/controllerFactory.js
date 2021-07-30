@@ -6,6 +6,4 @@ function createController(controllerName) {
     controllerType = new (require(`${process.env.FILEPATH}/app/controllers/${controllerName}Controller.js`));
     return controllerType;
 }
-module.exports = {
-    createController
-}
+module.exports = createController

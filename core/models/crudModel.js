@@ -1,7 +1,7 @@
 /** Class representing CRUD operations. */
 module.exports = class CRUDModel {
     create() {
-        console.log("create() is called");
+        console.log("model create() is called");
     }
     update() {
         console.log("update() is called");
