@@ -13,6 +13,7 @@ http.createServer(function (req, res) {
 
   /** Acquire modules. */
   const request = autoload('request');
+ // const response = autoload('response');
   const app = autoload('app');
 
   /** Setting request instance. */
@@ -20,10 +21,9 @@ http.createServer(function (req, res) {
   requestInstance.initialiseRequest(req, () => {
 
     /** Running app object. */
-    app.runApp();
-    res.write('123'.toString());
-    res.end();
-
+    let response = app.runApp();
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(response.getContent());
   });
 
 }).listen(3000);
