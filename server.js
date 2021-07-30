@@ -13,12 +13,12 @@ http.createServer(function (req, res) {
 
   /** Acquire modules. */
   const request = autoload('request');
-  const app = autoload('appObject');
+  const app = autoload('app');
 
   /** Setting request instance. */
   requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
-    
+
     /** Running app object. */
     app.runApp();
     res.write('123'.toString());

@@ -6,7 +6,7 @@ function autoload(moduleName) {
 
     const request = require(`${process.env.FILEPATH}/core/request.js`);
     const appObject = require(`${process.env.FILEPATH}/public/app.js`);
-    const appStart = new appObject();
+    const app = new appObject();
     const dispatcher = require(`${process.env.FILEPATH}/core/dispatcher.js`);
     const dispatchRequest = new dispatcher();
     const controller_factory = require(`${process.env.FILEPATH}/core/controllers/controllerFactory.js`);
@@ -20,7 +20,7 @@ function autoload(moduleName) {
     const response = require(`${process.env.FILEPATH}/core/response.js`);
     autoloadObject = {
         "request": request,
-        "appObject": appStart,
+        "app": app,
         "dispatcher": dispatchRequest,
         "controllerFactory": controllerFactory,
         "modelFactory": modelFactory,
