@@ -15,6 +15,6 @@ module.exports = class Dispatcher {
         if (!controllerName) {
             controllerName = 'default';
         }
-        let controllerObject = controllerFactory.createController(controllerName).performAction();
+         return controllerFactory.createController(controllerName).performAction(controllerName);
     }
 }
