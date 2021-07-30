@@ -5,6 +5,7 @@ module.exports = class App {
     runApp() {
         const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         console.log('App is invoked');
-        autoload('dispatcher').dispatchRequest();
+        return autoload('dispatcher').dispatchRequest();
+        
     }
 }
