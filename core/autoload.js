@@ -17,7 +17,8 @@ function autoload(moduleName) {
     const crudModel = require(`${process.env.FILEPATH}/core/models/crudModel.js`);
     const viewManager = require(`${process.env.FILEPATH}/core/views/viewManager.js`);
     const view_manager = new viewManager();
-    const response = require(`${process.env.FILEPATH}/core/response.js`);
+    const responseObj = require(`${process.env.FILEPATH}/core/response.js`);
+    const response=new responseObj(); 
     autoloadObject = {
         "request": request,
         "app": app,
