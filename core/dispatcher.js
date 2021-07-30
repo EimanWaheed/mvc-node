@@ -9,15 +9,12 @@ module.exports = class Dispatcher {
         const request = autoload('request');
         const createController = autoload('controller');
         let requestInstance = request.getInstance();
-        let controllerObj = "";
 
         /** Check the availibility of controller. */
-        if (requestInstance.controllerName) {
-            controllerObj = createController(requestInstance.controllerName);
-            controllerObj.performAction();
-        } else {
-            controllerObj = createController('default');
-            controllerObj.performAction();
+        let controllerName = requestInstance.getController();
+        if (!controllerName) {
+            controllerName = 'default';
         }
+        let controllerObj = createController(controllerName).performAction();
     }
 }

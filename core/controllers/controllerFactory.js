@@ -3,7 +3,9 @@
  * @param {string} controllerName 
  */
 function createController(controllerName) {
-    controllerType = new (require(`${process.env.FILEPATH}/app/controllers/${controllerName}Controller.js`));
+
+    /** Check the availibility of controller. */
+    let controllerType = new (require(`${process.env.FILEPATH}/app/controllers/${controllerName}Controller.js`));
     return controllerType;
 }
 module.exports = createController

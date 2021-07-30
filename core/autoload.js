@@ -4,7 +4,6 @@
  */
 function autoload(moduleName) {
 
-
     const request = require(`${process.env.FILEPATH}/core/request.js`);
     const appObject = require(`${process.env.FILEPATH}/public/app.js`);
     const appStart = new appObject();

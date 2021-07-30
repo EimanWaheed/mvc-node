@@ -11,7 +11,7 @@ module.exports = class RestController {
     create() {
         let modelObj = "";
         console.log("create() is called");
-        modelObj = createModel(requestInstance.controllerName);
+        modelObj = createModel(requestInstance.getController());
         modelObj.create();
     }
     update() {
@@ -26,17 +26,19 @@ module.exports = class RestController {
     loadDefault() {
         console.log("DefaultViewLoader() called");
         /** View Manager is called. */
-        if (!requestInstance.controllerName) { //for handling undefined case, views->default->defaultView
-            viewManager.viewManager('default', 'defaultView');
-        } else {
-            viewManager.viewManager(requestInstance.controllerName, requestInstance.actionName);
+        let controllerName=requestInstance.getController();
+        let actionName=requestInstance.getAction();
+        if(!controllerName){
+            controllerName='default';
+            actionName='defaultView';
         }
+        viewManager.viewManager(controllerName, actionName);
     }
     /** Dynamically calls the action specified in the request. */
     performAction() {
         console.log("performAction() is called");
-        if (requestInstance.actionName) {
-            this[requestInstance.actionName]();
+        if (requestInstance.getAction()) {
+            this[requestInstance.getAction()]();
         } else {
             return this.loadDefault();
         }
