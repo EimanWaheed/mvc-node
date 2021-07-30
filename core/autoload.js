@@ -8,9 +8,11 @@ function autoload(moduleName) {
     const appObject = require(`${process.env.FILEPATH}/public/app.js`);
     const appStart = new appObject();
     const dispatcher = require(`${process.env.FILEPATH}/core/dispatcher.js`);
-    const dispatchReq = new dispatcher();
-    const controller = require(`${process.env.FILEPATH}/core/controllers/controllerFactory.js`);
-    const modelObject = require(`${process.env.FILEPATH}/core/models/modelFactory.js`);
+    const dispatchRequest = new dispatcher();
+    const controller_factory = require(`${process.env.FILEPATH}/core/controllers/controllerFactory.js`);
+    const controllerFactory = new controller_factory();
+    const model_factory = require(`${process.env.FILEPATH}/core/models/modelFactory.js`);
+    const modelFactory = new model_factory();
     const RestController = require(`${process.env.FILEPATH}/core/controllers/restController.js`);
     const crudModel = require(`${process.env.FILEPATH}/core/models/crudModel.js`);
     const viewManager = require(`${process.env.FILEPATH}/core/views/viewManager.js`);
@@ -19,9 +21,9 @@ function autoload(moduleName) {
     autoloadObject = {
         "request": request,
         "appObject": appStart,
-        "dispatcher": dispatchReq,
-        "controller": controller,
-        "modelObject": modelObject,
+        "dispatcher": dispatchRequest,
+        "controllerFactory": controllerFactory,
+        "modelFactory": modelFactory,
         "RestController": RestController,
         "crudModel": crudModel,
         "viewManager": view_manager,

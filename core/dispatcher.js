@@ -7,7 +7,7 @@ module.exports = class Dispatcher {
         /** Acquiring modules. */
         const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const request = autoload('request');
-        const createController = autoload('controller');
+        const controllerFactory = autoload('controllerFactory');
         let requestInstance = request.getInstance();
 
         /** Check the availibility of controller. */
@@ -15,6 +15,6 @@ module.exports = class Dispatcher {
         if (!controllerName) {
             controllerName = 'default';
         }
-        let controllerObj = createController(controllerName).performAction();
+        let controllerObject = controllerFactory.createController(controllerName).performAction();
     }
 }

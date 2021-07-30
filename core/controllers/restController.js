@@ -1,7 +1,7 @@
 /** Acquiring the modules. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const request = autoload('request');
-const createModel = autoload('modelObject');
+const modelFactory = autoload('modelFactory');
 const viewManager = autoload('viewManager');
 let requestInstance = request.getInstance();
 /** Class representing CRUD operations. */
@@ -9,9 +9,8 @@ module.exports = class RestController {
 
     /** Initialises the model object specified in the request. */
     create() {
-        let modelObj = "";
         console.log("create() is called");
-        modelObj = createModel(requestInstance.getController());
+        let modelObj = modelFactory.createModel(requestInstance.getController());
         modelObj.create();
     }
     update() {

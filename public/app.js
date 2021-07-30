@@ -1,5 +1,5 @@
 /** Class representing running application from single entry point. */
-module.exports = class ApplicationRun {
+module.exports = class App {
 
     /** Runs the applicating by invoking Dispatcher. */
     runApp() {
