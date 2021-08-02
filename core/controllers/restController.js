@@ -1,3 +1,6 @@
+/** Acquiring autoloader. */
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+        
 /** Class representing CRUD operations. */
 module.exports = class RestController {
 
@@ -6,7 +9,6 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     create(controllerName) {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const modelFactory = autoload('modelFactory');
         const viewManager = autoload('viewManager');
         let modelObject = modelFactory.createModel(controllerName);
@@ -19,9 +21,9 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     update(controllerName) {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const viewManager = autoload('viewManager');
         console.log("update() is called");
+        return viewManager.loadView(controllerName, requestInstance.getAction());
     }
 
     /**
@@ -29,9 +31,9 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     list(controllerName) {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const viewManager = autoload('viewManager');
         console.log("list() is called");
+        return viewManager.loadView(controllerName, `${requestInstance.getAction()}Data`);
     }
 
     /**
@@ -39,17 +41,16 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     delete(controllerName) {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const viewManager = autoload('viewManager');
         console.log("delete() is called");
+        return viewManager.loadView(controllerName, requestInstance.getAction());
     }
 
     /**
      * Loads the default views using view manager.
      * @param {string} controllerName 
      */
-    loadDefault(controllerName) {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+    defaultView(controllerName) {
         const viewManager = autoload('viewManager');
         return viewManager.loadView(controllerName, 'defaultView');
     }
@@ -59,11 +60,10 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     performAction(controllerName) {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const requestInstance = autoload('request').getInstance();
         let actionName = requestInstance.getAction();
         if (!actionName) {
-            actionName = 'loadDefault';
+            actionName = 'defaultView';
         }
         return this[actionName](controllerName);
     }
