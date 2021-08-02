@@ -11,6 +11,7 @@ module.exports = class RestController {
         const viewManager = autoload('viewManager');
         let modelObject = modelFactory.createModel(controllerName);
         modelObject.create();
+        return viewManager.loadView(controllerName, requestInstance.getAction());
     }
 
     /**
