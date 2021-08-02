@@ -1,8 +1,6 @@
 require('./config');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const http = require('http');
-const url = require('url');
-const fs = require('fs');
 
 /** 
  * Creates local HTTP server and it is a single entry point.
