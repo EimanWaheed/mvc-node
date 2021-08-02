@@ -5,7 +5,6 @@ module.exports = class controllerFactory {
      * @param {string} controllerName 
      */
     createController(controllerName) {
-        let controllerType = new (require(`${process.env.FILEPATH}/app/controllers/${controllerName}Controller.js`));
-        return controllerType;
+        return new (require(`${process.env.FILEPATH}/app/controllers/${controllerName}Controller.js`));
     }
 }
