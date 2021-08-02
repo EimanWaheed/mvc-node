@@ -1,3 +1,6 @@
+/** Acquire Autoloader. */
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+        
 /** Class representing dispatcher which is responsbible for invoking Controller. */
 module.exports = class Dispatcher {
 
@@ -5,13 +8,11 @@ module.exports = class Dispatcher {
     dispatchRequest() {
 
         /** Acquiring modules. */
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
         const request = autoload('request');
         const controllerFactory = autoload('controllerFactory');
-        let requestInstance = request.getInstance();
-
+    
         /** Check the availibility of controller. */
-        let controllerName = requestInstance.getController();
+        let controllerName = request.getInstance().getController();
         if (!controllerName) {
             controllerName = 'default';
         }
