@@ -20,10 +20,12 @@ http.createServer(function (req, res) {
   requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
 
+    console.log(requestInstance);
     /** Running app object. */
     let response = app.runApp();
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(response.getContent());
+    res.end();
   });
 
 }).listen(3000);
