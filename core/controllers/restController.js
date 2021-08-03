@@ -1,6 +1,6 @@
 /** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-        
+
 /** Class representing CRUD operations. */
 module.exports = class RestController {
 
@@ -11,9 +11,11 @@ module.exports = class RestController {
     create(controllerName) {
         const modelFactory = autoload('modelFactory');
         const viewManager = autoload('viewManager');
-        let modelObject = modelFactory.createModel(controllerName);
-        modelObject.create();
-        return viewManager.loadView(controllerName, requestInstance.getAction());
+        const params=autoload('request').getInstance().getParams();
+        if (Object.keys(params).length != 0) {
+            modelFactory.createModel(controllerName).create();
+        } 
+        return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
     }
 
     /**
@@ -21,9 +23,13 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     update(controllerName) {
+        const modelFactory = autoload('modelFactory');
         const viewManager = autoload('viewManager');
-        console.log("update() is called");
-        return viewManager.loadView(controllerName, requestInstance.getAction());
+        const params=autoload('request').getInstance().getParams();
+        if (Object.keys(params).length != 0) {
+            modelFactory.createModel(controllerName).update();
+        } 
+        return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
     }
 
     /**
@@ -33,7 +39,7 @@ module.exports = class RestController {
     list(controllerName) {
         const viewManager = autoload('viewManager');
         console.log("list() is called");
-        return viewManager.loadView(controllerName, `${requestInstance.getAction()}Data`);
+        return viewManager.loadView(controllerName, `${autoload('request').getInstance().getAction()}Data`);
     }
 
     /**
@@ -41,9 +47,13 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     delete(controllerName) {
+        const modelFactory = autoload('modelFactory');
         const viewManager = autoload('viewManager');
-        console.log("delete() is called");
-        return viewManager.loadView(controllerName, requestInstance.getAction());
+        const params=autoload('request').getInstance().getParams();
+        if (Object.keys(params).length != 0) {
+            modelFactory.createModel(controllerName).delete();
+        } 
+        return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
     }
 
     /**

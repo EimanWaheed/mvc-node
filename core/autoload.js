@@ -1,3 +1,5 @@
+const StudentMetaData = require("../app/models/metadata/studentMetaData");
+
 /**
  * Autoload function takes module name as an input, loads it and returns the object.
  * @param {string} moduleName 
@@ -18,7 +20,11 @@ function autoload(moduleName) {
     const viewManager = require(`${process.env.FILEPATH}/core/views/viewManager.js`);
     const view_manager = new viewManager();
     const responseObj = require(`${process.env.FILEPATH}/core/response.js`);
-    const response=new responseObj(); 
+    const response = new responseObj();
+    const studentMetaData = require(`${process.env.FILEPATH}/app/models/metadata/studentMetaData.js`);
+    const query_builder = require(`${process.env.FILEPATH}/core/models/database/driver/mysqli/queryBuilder.js`);
+    const queryBuilder = new query_builder();
+    const driver = require(`${process.env.FILEPATH}/core/models/database/driver/mysqli/driver.js`);
     autoloadObject = {
         "request": request,
         "app": app,
@@ -28,7 +34,10 @@ function autoload(moduleName) {
         "RestController": RestController,
         "crudModel": crudModel,
         "viewManager": view_manager,
-        "response": response
+        "response": response,
+        "studentMetaData": studentMetaData,
+        "queryBuilder": queryBuilder,
+        "driver": driver
     }
     return autoloadObject[moduleName];
 }

@@ -15,7 +15,7 @@ http.createServer(function (req, res) {
   const app = autoload('app');
 
   /** Setting request instance. */
-  requestInstance = request.getInstance();
+  const requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
 
     console.log(requestInstance);
