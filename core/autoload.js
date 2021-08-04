@@ -22,6 +22,8 @@ function autoload(moduleName) {
     const responseObj = require(`${process.env.FILEPATH}/core/response.js`);
     const response = new responseObj();
     const studentMetaData = require(`${process.env.FILEPATH}/app/models/metadata/studentMetaData.js`);
+    const teacherMetaData = require(`${process.env.FILEPATH}/app/models/metadata/teacherMetaData.js`);
+    const courseMetaData = require(`${process.env.FILEPATH}/app/models/metadata/courseMetaData.js`);
     const query_builder = require(`${process.env.FILEPATH}/core/models/database/driver/mysqli/queryBuilder.js`);
     const queryBuilder = new query_builder();
     const driver = require(`${process.env.FILEPATH}/core/models/database/driver/mysqli/driver.js`);
@@ -36,6 +38,8 @@ function autoload(moduleName) {
         "viewManager": view_manager,
         "response": response,
         "studentMetaData": studentMetaData,
+        "teacherMetaData": teacherMetaData,
+        "courseMetaData": courseMetaData,
         "queryBuilder": queryBuilder,
         "driver": driver
     }
