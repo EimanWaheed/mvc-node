@@ -11,14 +11,12 @@ http.createServer(function (req, res) {
 
   /** Acquire modules. */
   const request = autoload('request');
- // const response = autoload('response');
   const app = autoload('app');
 
   /** Setting request instance. */
   const requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
 
-    console.log(requestInstance);
     /** Running app object. */
     let response = app.runApp();
     res.writeHead(200, { 'Content-Type': 'text/html' });
