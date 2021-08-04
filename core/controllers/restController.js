@@ -1,5 +1,7 @@
 /** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const modelFactory = autoload('modelFactory');
+const viewManager = autoload('viewManager');
 
 /** Class representing CRUD operations. */
 module.exports = class RestController {
@@ -9,12 +11,10 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     create(controllerName) {
-        const modelFactory = autoload('modelFactory');
-        const viewManager = autoload('viewManager');
-        const params=autoload('request').getInstance().getParams();
+        const params = autoload('request').getInstance().getParams();
         if (Object.keys(params).length != 0) {
-            modelFactory.createModel(controllerName).create();
-        } 
+            modelFactory.createModel(controllerName).create(params);
+        }
         return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
     }
 
@@ -23,12 +23,10 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     update(controllerName) {
-        const modelFactory = autoload('modelFactory');
-        const viewManager = autoload('viewManager');
-        const params=autoload('request').getInstance().getParams();
+        const params = autoload('request').getInstance().getParams();
         if (Object.keys(params).length != 0) {
-            modelFactory.createModel(controllerName).update();
-        } 
+            modelFactory.createModel(controllerName).update(params);
+        }
         return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
     }
 
@@ -37,9 +35,14 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     list(controllerName) {
-        const viewManager = autoload('viewManager');
-        console.log("list() is called");
+        const params = autoload('request').getInstance().getParams();
+        let result=modelFactory.createModel(controllerName).list(params);
+        viewManager.setData(result);
         return viewManager.loadView(controllerName, `${autoload('request').getInstance().getAction()}Data`);
+        
+        // let payLoad = { 'data': [] };
+        // payLoad.data = result; 
+        // return payLoad;
     }
 
     /**
@@ -47,12 +50,10 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     delete(controllerName) {
-        const modelFactory = autoload('modelFactory');
-        const viewManager = autoload('viewManager');
-        const params=autoload('request').getInstance().getParams();
+        const params = autoload('request').getInstance().getParams();
         if (Object.keys(params).length != 0) {
-            modelFactory.createModel(controllerName).delete();
-        } 
+            modelFactory.createModel(controllerName).delete(params);
+        }
         return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
     }
 
@@ -61,7 +62,6 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     defaultView(controllerName) {
-        const viewManager = autoload('viewManager');
         return viewManager.loadView(controllerName, 'defaultView');
     }
 
@@ -69,9 +69,7 @@ module.exports = class RestController {
      * Dynamically calls the action specified in the request.
      * @param {string} controllerName 
      */
-    performAction(controllerName) {
-        const requestInstance = autoload('request').getInstance();
-        let actionName = requestInstance.getAction();
+    performAction(controllerName, actionName) {
         if (!actionName) {
             actionName = 'defaultView';
         }
