@@ -11,11 +11,16 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     create(controllerName) {
-        const params = autoload('request').getInstance().getParams();
-        if (Object.keys(params).length != 0) {
-            modelFactory.createModel(controllerName).create(params);
+        try {
+            const params = autoload('request').getInstance().getParams();
+            if (Object.keys(params).length != 0) {
+                modelFactory.createModel(controllerName).create(params);
+            }
+            return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
         }
-        return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
+        catch (error) {
+            throw new Error("Error loading CreateView.");
+        }
     }
 
     /**
@@ -23,11 +28,16 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     update(controllerName) {
-        const params = autoload('request').getInstance().getParams();
-        if (Object.keys(params).length != 0) {
-            modelFactory.createModel(controllerName).update(params);
+        try {
+            const params = autoload('request').getInstance().getParams();
+            if (Object.keys(params).length != 0) {
+                modelFactory.createModel(controllerName).update(params);
+            }
+            return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
         }
-        return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
+        catch (error) {
+            throw new Error("Error loading UpdateView");
+        }
     }
 
     /**
@@ -35,14 +45,16 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     list(controllerName) {
-        const params = autoload('request').getInstance().getParams();
-        let result=modelFactory.createModel(controllerName).list(params);
-        viewManager.setData(result);
-        return viewManager.loadView(controllerName, `${autoload('request').getInstance().getAction()}Data`);
-        
-        // let payLoad = { 'data': [] };
-        // payLoad.data = result; 
-        // return payLoad;
+        try {
+            const params = autoload('request').getInstance().getParams();
+            let result = modelFactory.createModel(controllerName).list(params);
+            viewManager.setData(result);
+            return viewManager.loadView(controllerName, `${autoload('request').getInstance().getAction()}Data`);
+        }
+        catch (error) {
+            throw new Error("Error loading ListView");
+        }
+
     }
 
     /**
@@ -50,11 +62,16 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     delete(controllerName) {
-        const params = autoload('request').getInstance().getParams();
-        if (Object.keys(params).length != 0) {
-            modelFactory.createModel(controllerName).delete(params);
+        try {
+            const params = autoload('request').getInstance().getParams();
+            if (Object.keys(params).length != 0) {
+                modelFactory.createModel(controllerName).delete(params);
+            }
+            return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
         }
-        return viewManager.loadView(controllerName, autoload('request').getInstance().getAction());
+        catch (error) {
+            throw new Error("Error loading DeleteView");
+        }
     }
 
     /**
@@ -62,7 +79,12 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     defaultView(controllerName) {
-        return viewManager.loadView(controllerName, 'defaultView');
+        try {
+            return viewManager.loadView(controllerName, 'defaultView');
+        }
+        catch (error) {
+            throw new Error("Error loading DefaultView");
+        }
     }
 
     /**
@@ -70,10 +92,15 @@ module.exports = class RestController {
      * @param {string} controllerName 
      */
     performAction(controllerName, actionName) {
-        if (!actionName) {
-            actionName = 'defaultView';
+        try {
+            if (!actionName) {
+                actionName = 'defaultView';
+            }
+            return this[actionName](controllerName);
         }
-        return this[actionName](controllerName);
+        catch (error) {
+            throw new Error("Controller name not specified.");
+        }
     }
 
 }
