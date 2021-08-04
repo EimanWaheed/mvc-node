@@ -1,79 +1,61 @@
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 
+/** Class representing the CRUD operations for building and returning sql queries. */
 module.exports = class QueryBuilder {
+
+    /**
+     * Forms the insert sql query for inserting records in database.
+     * @param {object} entity 
+     * @return {sql query} sql query.
+     */
     create(entity) {
-        console.log("querybuilder create() called");
-        const params = autoload('request').getInstance().getParams();
-        let valueString = "";
-        for (const [key, value] of Object.entries(params)) {
-            if (value != params[Object.keys(params).pop()]) {
-                valueString += "'" + value + "'" + ',';
-            } else {
-                valueString += "'" + value + "'";
+        let keyString = "", valueString = "";
+        for (const key in entity) {
+            if (key != 'tableName' && key != 'id') {
+                keyString += key + ',';
+                valueString += "'" + entity[key] + "'" + ',';
             }
         }
-        console.log(valueString);
-
-        let keyString = "";
-        for (const [key, value] of Object.entries(entity)) {
-            if (Object.keys(entity)[0] != key) {
-                if (value != params[Object.keys(params).pop()]) {
-                    keyString += key + ',';
-                } else {
-                    keyString += key;
-                }
-            }
-        }
-        console.log(keyString);
-
+        keyString = keyString.substring(0, keyString.length - 1);
+        valueString = valueString.substring(0, valueString.length - 1);
         return (`INSERT INTO ${entity.tableName} (${keyString}) VALUES (${valueString})`);
-
     }
+
+    /**
+    * Forms the update sql query for updating records in database.
+    * @param {object} entity 
+    * @return {sql query} sql query.
+    */
     update(entity) {
-
-        console.log("querybuilder update() called");
-        console.log("querybuilder delete() called");
-        const params = autoload('request').getInstance().getParams();
-        let valueString = "";
-        for (const [key, value] of Object.entries(params)) {
-            if (value != params[Object.keys(params).pop()]) {
-                valueString += "'" + value + "'" + ',';
-            } else {
-                valueString += "'" + value + "'";
-            }
-        }
-        console.log(valueString);
-
         let keyString = "";
-        let i = 0;
-        for (const [key, value] of Object.entries(entity)) {
-            if (Object.keys(entity)[0] != key) {
-                if (value != params[Object.keys(params).pop()]) {
-                    keyString += key + '=' + Object.entries(params)[i] + ',';
-                } else {
-                    keyString += key + '=' + Object.entries(params)[i];
-                }
-                i++;
+        let valueString = "'" + entity['id'] + "'";
+        for (const key in entity) {
+            if (key != 'tableName') {
+                keyString += key + '=' + "'" + entity[key] + "'" + ',';
             }
         }
-        console.log(keyString);
-
-
-        return (`UPDATE ${entity.tableName} SET ${keyString} WHERE id=(${valueString})`);
-
-
+        keyString = keyString.substring(0, keyString.length - 1);
+        return (`UPDATE ${entity.tableName} SET ${keyString} WHERE id=${valueString}`);
     }
+
+    /**
+    * Forms the delete sql query for deleting records in database.
+    * @param {object} entity 
+    * @return {sql query} sql query.
+    */
     delete(entity) {
-        console.log("querybuilder delete() called");
-        const params = autoload('request').getInstance().getParams();
-        let valueString = "";
-        for (const [key, value] of Object.entries(params)) {
-            valueString += "'" + value + "'";
-        }
+        let valueString = "'" + entity['id'] + "'";
         return (`DELETE FROM ${entity.tableName} WHERE id=(${valueString})`);
     }
-    list(entity) {
 
+    /**
+     * Forms the select sql query for fetching all records from database.
+     * @param {object} entity 
+     * @return {sql query} sql query.
+     */
+    list(entity) {
         console.log("querybuilder list() called");
+        return (`SELECT * FROM ${entity.tableName}`);
+
     }
 }
