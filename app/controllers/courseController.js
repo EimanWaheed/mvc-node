@@ -5,6 +5,5 @@ const RestController = autoload('RestController');
 module.exports = class courseController extends RestController {
     constructor() {
         super();
-        //console.log("course controller is called")
     }
 }
