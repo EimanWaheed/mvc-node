@@ -54,7 +54,6 @@ module.exports = class QueryBuilder {
      * @return {sql query} sql query.
      */
     list(entity) {
-        console.log("querybuilder list() called");
         return (`SELECT * FROM ${entity.tableName}`);
 
     }
