@@ -2,14 +2,18 @@
 const url = require('url');
 const queryString = require('querystring');
 
-/** Class representing the request, for the purpose of setting the request object fetched from client.
-This class is responsible for parsing the URL and setting the parameters of controller, action and form data. 
-The instance of this class is made singleton using Singleton Design Pattern. */
+/** Class representing the request which has the properties of controllerName, actionName and params,
+ * for the purpose of initialising and setting the request object fetched from client. This class is 
+ * responsible for parsing the URL and setting the properties of the request instance. Since, no 
+ * multiple incoming requests can be dealt after receiving the request so the instance of this class 
+ * is made singleton using Singleton Design Pattern. 
+ */
+
 module.exports = class Request {
 
     /**
      * Get the singleton instance of the Request class.
-     * @return {string} The Request instance.
+     * @returns {string} The Request instance.
      */
     static getInstance() {
         if (!Request.instance) {
@@ -20,7 +24,7 @@ module.exports = class Request {
 
     /**
      * Get the controller name.
-     * @return {string} The controller name.
+     * @returns {string} The controller name.
      */
     getController() {
         return this.controllerName;
@@ -28,7 +32,7 @@ module.exports = class Request {
 
     /**
      * Get the action name.
-     * @return {string} The action name.
+     * @returns {string} The action name.
      */
     getAction() {
         return this.actionName;
@@ -36,14 +40,16 @@ module.exports = class Request {
 
     /**
     * Get the params object.
-    * @return {object} The params object.
+    * @returns {Object} The params object.
     */
     getParams() {
         return this.params;
     }
 
     /**
-     * Initialise and sets the request, then execute the callback function.
+     * Initialises and sets the request. It receives the request as an argument, parses the URL for the purpose 
+     * of retrieving the parameters from the body of URL, assings the parameters to the class properties and then
+     * executes the callback function.
      * @param {string} req 
      * @param {callBack} callBack 
      */
@@ -54,10 +60,8 @@ module.exports = class Request {
             body.push(chunk);
         });
         req.on('end', () => {
-            /** Get request body to set parameters. */
             body = Buffer.concat(body).toString();
             const paramsName = queryString.parse(body);
-            /** Get request headers to set parameters. */
             let queryObject = url.parse(req.url, true).query;
             this.controllerName = queryObject.controller;
             this.actionName = queryObject.action;

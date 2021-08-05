@@ -1,11 +1,16 @@
-/** Class representing running application from single entry point. */
+/** Class representing the application which is responsible for dispatching the request received from the server. 
+ * It is responsible for properly dispatching the request by invoking the dispatchRequest method of the Dispatch class.
+ * This class is of primary purpose of dispatching the received request which is carried forwards using its runApp method. 
+ */
 module.exports = class App {
 
-    /** Runs the applicating by invoking Dispatcher. */
+    /** 
+    * Runs the application by invoking Dispatcher.
+    * @returns {Object} response.
+    */
     runApp() {
         const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-        console.log('App is invoked');
         return autoload('dispatcher').dispatchRequest();
-        
+
     }
 }

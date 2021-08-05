@@ -43,7 +43,7 @@ module.exports = class Driver {
             return connection.query(queryString);
         }
         catch (error) {
-            throw new Error("Database not connected.");
+            throw new Error(error);
         }
     }
 }

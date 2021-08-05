@@ -55,6 +55,5 @@ module.exports = class QueryBuilder {
      */
     list(entity) {
         return (`SELECT * FROM ${entity.tableName}`);
-
     }
 }
