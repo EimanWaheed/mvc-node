@@ -16,7 +16,7 @@ http.createServer(function (req, res) {
   /** Setting request instance. */
   const requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
-
+    
     /** Running app object. */
     let response = app.runApp();
     res.writeHead(200, { 'Content-Type': 'text/html' });
