@@ -5,7 +5,6 @@ const crudModel = autoload('crudModel');
 module.exports = class studentModel extends crudModel {
     constructor() {
         super();
-        console.log("student model is called")
         const studentMetaData=autoload('studentMetaData');
         this.entity=new studentMetaData();
     }
