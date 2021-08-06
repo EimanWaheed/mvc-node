@@ -1,7 +1,11 @@
 const mySql = require("sync-mysql");
 
-/** Class representing the database connection, for the purpose of setting the database connection.
-This class is responsible for running the query, thus the instance of this class is made singleton using Singleton Design Pattern. */
+/** Class representing the driver for the database connection, for the purpose of setting the database connection
+* of the required database. It has the significance of building the connection specifying all the parameters required
+* to build the connection. Since, no multiple database connections can be made after we have instance of a required
+* database so the instance of this class is made singleton using Singleton Design Pattern. Furthermore, this class is 
+* responsible for running the query after building the connection. 
+*/
 module.exports = class Driver {
 
     constructor() {
@@ -15,7 +19,7 @@ module.exports = class Driver {
 
     /**
      * Get the singleton instance of the Driver class.
-     * @return {string} The Driver instance.
+     * @returns {Object} The Driver instance.
      */
     static getInstance() {
         if (!Driver.instance) {
@@ -26,16 +30,17 @@ module.exports = class Driver {
 
     /**
      * Get the connection string.
-     * @return {string} The connection string.
+     * @returns {string} The connection string.
      */
     getConnection() {
         return this.connection;
     }
 
     /**
-     * Runs the query and returns the result.
+     * Runs the query which is specified as a querystring in the param of the method
+     * and returns the result of the executed query.
      * @param {string} queryString 
-     * @return {object} The fetched data object.
+     * @returns {Object} The query result.
      */
     runQuery(queryString) {
         try {
