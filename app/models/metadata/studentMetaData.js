@@ -1,4 +1,10 @@
-/** Class representing Student Metadata which is responsible for acquiring all the properties of a student entity. */
+/** 
+ * Class representing Student Metadata which is responsible for setting the metadata of
+ * Student havign properties of id, name, password and email. These properties must be in 
+ * accordance with the column names in database which is called Object Relation Mapping.
+ * The student metadata class is implementing the ORM (Object relation mapping) for the 
+ * synchronous mapping of data in the database. 
+ */
 module.exports = class StudentMetaData {
     constructor() {
         this.tableName = "student";
@@ -6,7 +12,7 @@ module.exports = class StudentMetaData {
 
     /**
      * Sets the params to the metadata of student.
-     * @param {object} params 
+     * @param {Object} params 
      */
     setEntity(params) {
         this.id = params['id'];
