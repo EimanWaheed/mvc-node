@@ -11,7 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^2.0.7"
+    "babel-cli": "^6.26.0",
+    "domino": "^2.1.6",
+    "mustache": "^4.2.0",
+    "nodemon": "^2.0.12",
+    "sync-mysql": "^3.0.1",
+    "sync-mysql-database": "^2.3.4"
   },
   "devDependencies": {}
 }

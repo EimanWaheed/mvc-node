@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #course {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #course td,
+        #course th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #course tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #course tr:hover {
+            background-color: #ddd;
+        }
+
+        #course th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="course" style="width:100%">
+        <tr>
+            <th>Course records</th>
+        </tr>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>Course Code</th>
+        </tr>
+
+        {{#data}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{courseCode}}</td>
+        </tr>
+        {{/data}}
+    </table>
+
+</body>
+
+</html>
