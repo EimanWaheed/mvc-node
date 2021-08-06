@@ -11,7 +11,7 @@ const dbFactory = autoload('dbFactory');
 module.exports = class CRUDModel {
 
     /**
-     * Returns the driver of the specified database. 
+     * Returns the driver object of the specified database. 
      * @return {object} Driver object.
      */
     getDriver() {
@@ -19,7 +19,7 @@ module.exports = class CRUDModel {
     }
 
     /**
-     * Returns the querybuilder of the specified database. 
+     * Returns the querybuilder object of the specified database. 
      * @return {object} QueryBuilder object.
      */
     getQueryBuilder() {
