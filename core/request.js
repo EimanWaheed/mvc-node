@@ -13,7 +13,7 @@ module.exports = class Request {
 
     /**
      * Get the singleton instance of the Request class.
-     * @returns {string} The Request instance.
+     * @returns {Object} The Request instance.
      */
     static getInstance() {
         if (!Request.instance) {
