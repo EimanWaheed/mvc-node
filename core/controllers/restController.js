@@ -16,6 +16,9 @@ module.exports = class RestController {
         const modelFactory = autoload('modelFactory');
         return modelFactory.createModel(controllerName);
     }
+    getView(controllerName, actionName) {
+        return viewManager.loadView(controllerName, actionName);
+    }
     /**
      * Initialises the model object of the type specified in the request by 
      * invoking the createModel method of the modelFactory, as the object is 
@@ -31,7 +34,7 @@ module.exports = class RestController {
             if (Object.keys(params).length != 0) {
                 this.getModel(controllerName).create(params);
             }
-            return viewManager.loadView(controllerName, actionName);
+            return this.getView(controllerName, actionName);
         }
         catch (error) {
             throw new Error(error);
@@ -51,9 +54,9 @@ module.exports = class RestController {
         try {
             const params = autoload('request').getInstance().getParams();
             if (Object.keys(params).length != 0) {
-               this. getModel(controllerName).update(params);
+                this.getModel(controllerName).update(params);
             }
-            return viewManager.loadView(controllerName, actionName);
+            return this.getView(controllerName, actionName);
         }
         catch (error) {
             throw new Error(error);
@@ -74,7 +77,7 @@ module.exports = class RestController {
             const params = autoload('request').getInstance().getParams();
             let result = this.getModel(controllerName).list(params);
             viewManager.setData(result);
-            return viewManager.loadView(controllerName, `${actionName}Data`);
+            return this.getView(controllerName, `${actionName}Data`);
         }
         catch (error) {
             throw new Error(error);
@@ -97,7 +100,7 @@ module.exports = class RestController {
             if (Object.keys(params).length != 0) {
                 this.getModel(controllerName).delete(params);
             }
-            return viewManager.loadView(controllerName, actionName);
+            return this.getView(controllerName, actionName);
         }
         catch (error) {
             throw new Error(error);
@@ -113,7 +116,7 @@ module.exports = class RestController {
      */
     defaultView(controllerName, actionName) {
         try {
-            return viewManager.loadView(controllerName, 'defaultView');
+            return this.getView(controllerName, 'defaultView');
         }
         catch (error) {
             throw new Error(error);
