@@ -26,6 +26,9 @@ module.exports = class CRUDModel {
         return dbFactory.loadQueryBuilder();
     }
 
+    getEntity() {
+        return this.entity;
+    }
     /**
      * Initialises the metadata of respective model as it takes params as a 
      * parameter, gets the querybuilder and driver instance by invoking getter
@@ -35,9 +38,9 @@ module.exports = class CRUDModel {
      */
     create(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().create(this.entity);
-            this.getDriver().runQuery(queryString);
+            return (this.getDriver().runQuery(queryString));
         }
         catch (error) {
             throw new Error(error);
@@ -53,9 +56,9 @@ module.exports = class CRUDModel {
      */
     update(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().update(this.entity);
-            this.getDriver().runQuery(queryString);
+            return (this.getDriver().runQuery(queryString));
         }
         catch (error) {
             throw new Error(error);
@@ -71,7 +74,7 @@ module.exports = class CRUDModel {
      */
     list(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().list(this.entity);
             return (this.getDriver().runQuery(queryString));
         }
@@ -89,9 +92,9 @@ module.exports = class CRUDModel {
      */
     delete(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().delete(this.entity);
-            this.getDriver().runQuery(queryString);
+            return (this.getDriver().runQuery(queryString));
         }
         catch (error) {
             throw new Error(error);

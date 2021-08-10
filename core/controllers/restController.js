@@ -1,6 +1,6 @@
 /** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-
+const requestInstance = autoload('request').getInstance();
 const viewManager = autoload('viewManager');
 
 /** Class representing CRUD operations which will be responsible for generating 
@@ -17,6 +17,7 @@ module.exports = class RestController {
         return modelFactory.createModel(controllerName);
     }
     getView(controllerName, actionName) {
+
         return viewManager.loadView(controllerName, actionName);
     }
     /**
@@ -30,9 +31,10 @@ module.exports = class RestController {
      */
     create(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
+            const params = requestInstance.getParams();
             if (Object.keys(params).length != 0) {
-                this.getModel(controllerName).create(params);
+                const modelObj = this.getModel(controllerName);
+                modelObj.create(params);
             }
             return this.getView(controllerName, actionName);
         }
@@ -52,9 +54,10 @@ module.exports = class RestController {
      */
     update(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
+            const params = requestInstance.getParams();
             if (Object.keys(params).length != 0) {
-                this.getModel(controllerName).update(params);
+                const modelObj = this.getModel(controllerName);
+                modelObj.update(params);
             }
             return this.getView(controllerName, actionName);
         }
@@ -74,8 +77,9 @@ module.exports = class RestController {
      */
     list(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
-            let result = this.getModel(controllerName).list(params);
+            const params = requestInstance.getParams();
+            const modelObj = this.getModel(controllerName);
+            let result = modelObj.list(params);
             viewManager.setData(result);
             return this.getView(controllerName, `${actionName}Data`);
         }
@@ -96,9 +100,10 @@ module.exports = class RestController {
      */
     delete(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
+            const params = requestInstance.getParams();
             if (Object.keys(params).length != 0) {
-                this.getModel(controllerName).delete(params);
+                const modelObj = this.getModel(controllerName);
+                modelObj.delete(params);
             }
             return this.getView(controllerName, actionName);
         }
