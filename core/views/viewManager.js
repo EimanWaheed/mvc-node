@@ -19,7 +19,7 @@ module.exports = class ViewManager {
     loadView(controllerName, actionName) {
         try {
             const fs = require('fs');
-            const response = autoload('response');
+            const response = new (autoload('response'));
             const htmlData = fs.readFileSync(`${process.env.FILEPATH}/app/views/${controllerName}/${actionName}.html`, 'utf-8');
             const viewString = mustache.render(htmlData, this.templateKey);
             response.setContent(viewString);
