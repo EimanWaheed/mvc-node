@@ -1,7 +1,7 @@
 /** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const requestInstance = autoload('request').getInstance();
-const viewManager = autoload('viewManager');
+const viewManager = new (autoload('viewManager'));
 
 /** Class representing CRUD operations which will be responsible for generating 
  * model object and returning the views for create, delete, list , update and default. 
@@ -12,10 +12,19 @@ const viewManager = autoload('viewManager');
  */
 module.exports = class RestController {
 
+    /**
+     * Get the desired model.
+     * @param {string} controllerName 
+     */
     getModel(controllerName) {
-        const modelFactory = autoload('modelFactory');
-        return modelFactory.createModel(controllerName);
+        return (new (autoload('modelFactory'))).createModel(controllerName);
     }
+
+    /**
+     * Get the desired view.
+     * @param {string} controllerName 
+     * @param {string} actionName 
+     */
     getView(controllerName, actionName) {
 
         return viewManager.loadView(controllerName, actionName);
