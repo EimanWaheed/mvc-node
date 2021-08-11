@@ -1,9 +1,7 @@
-require('/home/eiman.waheed/Desktop/mvc-node/config.js');
 const sinon = require('sinon');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const crudModel = new (autoload('crudModel'));
-
 QUnit.module("CRUD Model", function (hooks) {
+    const crudModel = new (autoload('crudModel'));
     let entityStub = "", driverStub = "", querybuilderStub = "";
     const paramsObj = {
         "id": 5,
@@ -32,7 +30,7 @@ QUnit.module("CRUD Model", function (hooks) {
         driverStub.restore();
         querybuilderStub.restore();
     });
-    
+
     /** Create test cases. */
     QUnit.test("Create Test A for if statement", function (assert) {
         const result = crudModel.create(paramsObj);
