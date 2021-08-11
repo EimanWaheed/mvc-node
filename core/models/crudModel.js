@@ -1,6 +1,6 @@
 /** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const dbFactory = autoload('dbFactory');
+const dbFactory = new (autoload('dbFactory'));
 
 /** Class representing CRUD operations which will be responsible for creating,
  * updating, deleting and listing records. These CRUD operations are perfomed
