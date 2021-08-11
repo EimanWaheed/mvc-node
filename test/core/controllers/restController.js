@@ -1,9 +1,7 @@
-require('/home/eiman.waheed/Desktop/mvc-node/config.js');
 const sinon = require('sinon');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const request = autoload('request').getInstance();
 const restController = new (autoload('RestController'));
-
 QUnit.module("Rest Controller", function (hooks) {
     let paramsStub = "", modelStub = "", viewStub = "";
     /** Set up after each test. */
