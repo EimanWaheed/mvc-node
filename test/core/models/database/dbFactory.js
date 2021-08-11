@@ -1,8 +1,7 @@
-require('/home/eiman.waheed/Desktop/mvc-node/config.js');
 const sinon = require('sinon');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const driverFactory = new autoload('driver');
 QUnit.module("Database Factory", function (hooks) {
+    const driverFactory = new autoload('driver');
     let instanceStub = "";
     /** Set up after each test. */
     hooks.beforeEach(function (assert) {
@@ -22,7 +21,7 @@ QUnit.module("Database Factory", function (hooks) {
         assert.deepEqual(actualObject, expectedObject);
     });
     QUnit.test('Exception Test case', function (assert) {
-        instanceStub.throws(Error);
+        process.env.DBNAME = 'mongoDB';
         assert.throws(function () {
             autoload('dbFactory').loadDriver();
         });
@@ -30,9 +29,15 @@ QUnit.module("Database Factory", function (hooks) {
 
     /** QueryBuilder test case */
     QUnit.test('QueryBuilder Test case ', function (assert) {
+        process.env.DBNAME = "mysqli";
         const actualObject = autoload('dbFactory').loadQueryBuilder();
-        console.log(actualObject);
-        const expectedObject = { "connection": {} };
+        const expectedObject = new (require(`${process.env.FILEPATH}/core/models/database/driver/mysqli/queryBuilder`));
         assert.deepEqual(actualObject, expectedObject);
+    });
+    QUnit.test('Exception Test case', function (assert) {
+        process.env.DBNAME = 'mongoDB';
+        assert.throws(function () {
+            autoload('dbFactory').loadQueryBuilder();
+        });
     });
 });
