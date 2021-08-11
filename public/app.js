@@ -10,7 +10,6 @@ module.exports = class App {
     */
     runApp() {
         const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-        return autoload('dispatcher').dispatchRequest();
-
+        return (new (autoload('dispatcher'))).dispatchRequest();
     }
 }
