@@ -2,6 +2,7 @@ const sinon = require('sinon');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const request = autoload('request').getInstance();
 const restController = new (autoload('RestController'));
+
 QUnit.module("Rest Controller", function (hooks) {
     let paramsStub = "", modelStub = "", viewStub = "";
     /** Set up after each test. */
@@ -37,12 +38,6 @@ QUnit.module("Rest Controller", function (hooks) {
     });
     QUnit.test("Create Test B", function (assert) {
         paramsStub.returns({});
-        modelStub.returns({
-            create: () => { return false },
-            delete: () => { return true },
-            update: () => { return true },
-            list: () => { return true }
-        });
         viewStub.returns(true);
         const result = restController.create('student', 'create');
         assert.equal(result, true);
@@ -80,12 +75,6 @@ QUnit.module("Rest Controller", function (hooks) {
     });
     QUnit.test("Update Test B", function (assert) {
         paramsStub.returns({});
-        modelStub.returns({
-            create: () => { return false },
-            delete: () => { return true },
-            update: () => { return true },
-            list: () => { return true }
-        });
         viewStub.returns(true);
         const result = restController.update('student', 'create');
         assert.equal(result, true);
@@ -152,12 +141,6 @@ QUnit.module("Rest Controller", function (hooks) {
     });
     QUnit.test("Delete Test B", function (assert) {
         paramsStub.returns({});
-        modelStub.returns({
-            create: () => { return false },
-            delete: () => { return true },
-            update: () => { return true },
-            list: () => { return true }
-        });
         viewStub.returns(true);
         const result = restController.delete('student', 'create');
         assert.equal(result, true);

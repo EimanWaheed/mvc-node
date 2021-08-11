@@ -14,6 +14,7 @@ module.exports = class CRUDModel {
      * Returns the driver object of the specified database. 
      * @return {object} Driver object.
      */
+    /* istanbul ignore next */
     getDriver() {
         return dbFactory.loadDriver();
     }
@@ -22,10 +23,16 @@ module.exports = class CRUDModel {
      * Returns the querybuilder object of the specified database. 
      * @return {object} QueryBuilder object.
      */
+    /* istanbul ignore next */
     getQueryBuilder() {
         return dbFactory.loadQueryBuilder();
     }
 
+    /**
+     * Returns the entity object. 
+     * @return {object} Entity object.
+     */
+    /* istanbul ignore next */
     getEntity() {
         return this.entity;
     }

@@ -1,5 +1,6 @@
 const sinon = require('sinon');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+
 QUnit.module("CRUD Model", function (hooks) {
     const crudModel = new (autoload('crudModel'));
     let entityStub = "", driverStub = "", querybuilderStub = "";
@@ -45,37 +46,37 @@ QUnit.module("CRUD Model", function (hooks) {
 
     /** Update test cases */
     QUnit.test("Update Test A for if statement", function (assert) {
-        const result = crudModel.create(paramsObj);
+        const result = crudModel.update(paramsObj);
         assert.equal(result, true);
     });
     QUnit.test("Update Test B for Exception", function (assert) {
         driverStub.throws(Error);
         assert.throws(function () {
-            crudModel.create(paramsObj);;
+            crudModel.update(paramsObj);;
         });
     });
 
     /** Delete test cases */
     QUnit.test("Delete Test A for if statement", function (assert) {
-        const result = crudModel.create(paramsObj);
+        const result = crudModel.delete(paramsObj);
         assert.equal(result, true);
     });
     QUnit.test("Delete Test B for Exception", function (assert) {
         driverStub.throws(Error);
         assert.throws(function () {
-            crudModel.create(paramsObj);;
+            crudModel.delete(paramsObj);;
         });
     });
 
     /** List test cases */
     QUnit.test("List Test A for if statement", function (assert) {
-        const result = crudModel.create(paramsObj);
+        const result = crudModel.list(paramsObj);
         assert.equal(result, true);
     });
     QUnit.test("List Test B for Exception", function (assert) {
         driverStub.throws(Error);
         assert.throws(function () {
-            crudModel.create(paramsObj);;
+            crudModel.list(paramsObj);;
         });
     });
 });

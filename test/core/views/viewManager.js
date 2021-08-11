@@ -1,6 +1,7 @@
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+
 QUnit.module("View Manager", function (assert) {
-    const viewManager = autoload('viewManager');
+    const viewManager = (new (autoload('viewManager')));
     const fs = require('fs');
     const actualData = viewManager.loadView('student', 'create').getContent();
     const expectedData = fs.readFileSync(`${process.env.FILEPATH}/app/views/student/create.html`, 'utf-8');

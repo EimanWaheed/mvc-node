@@ -1,4 +1,5 @@
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+
 QUnit.module("QueryBuilder", function (assert) {
     const queryBuilder = new (autoload('queryBuilder'));
     const studentMetaData = {

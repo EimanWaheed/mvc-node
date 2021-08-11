@@ -14,8 +14,7 @@ module.exports = class ModelFactory {
     */
     createModel(modelName) {
         try {
-            let modelType = new (require(`${process.env.FILEPATH}/app/models/${modelName}.js`));
-            return modelType;
+            return (new (require(`${process.env.FILEPATH}/app/models/${modelName}.js`)));
         }
         catch (error) {
             throw new Error(`${modelName} object not created.`);

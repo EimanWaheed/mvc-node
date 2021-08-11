@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "qunit",
+    "test": "nyc qunit",
     "start": "nodemon server.js"
   },
   "author": "",
@@ -16,6 +16,7 @@
     "jsdoc": "^3.6.7",
     "mustache": "^4.2.0",
     "nodemon": "^2.0.12",
+    "nyc": "^15.1.0",
     "qunit": "^2.16.0",
     "sinon": "^11.1.2",
     "sync-mysql": "^3.0.1",

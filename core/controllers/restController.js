@@ -16,6 +16,7 @@ module.exports = class RestController {
      * Get the desired model.
      * @param {string} controllerName 
      */
+    /* istanbul ignore next */
     getModel(controllerName) {
         return (new (autoload('modelFactory'))).createModel(controllerName);
     }
@@ -25,6 +26,7 @@ module.exports = class RestController {
      * @param {string} controllerName 
      * @param {string} actionName 
      */
+    /* istanbul ignore next */
     getView(controllerName, actionName) {
 
         return viewManager.loadView(controllerName, actionName);
@@ -143,6 +145,7 @@ module.exports = class RestController {
      * the CRUD operation by dynamically making the function call.
      * @param {string} controllerName 
      */
+    /* istanbul ignore next */
     performAction(controllerName, actionName) {
         try {
             if (!actionName) {
