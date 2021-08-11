@@ -16,9 +16,6 @@ module.exports = class Dispatcher {
      */
     dispatchRequest() {
 
-        /** Acquiring modules. */
-        const controllerFactory = autoload('controllerFactory');
-
         /** Check the availibility of controller. */
         let requestInstance = autoload('request').getInstance();
         let controllerName = requestInstance.getController();
@@ -26,6 +23,6 @@ module.exports = class Dispatcher {
         if (!controllerName) {
             controllerName = 'default';
         }
-        return controllerFactory.createController(controllerName).performAction(controllerName, actionName);
+        return (new (autoload('controllerFactory'))).createController(controllerName).performAction(controllerName, actionName);
     }
 }
