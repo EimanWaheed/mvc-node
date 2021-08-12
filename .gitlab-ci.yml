@@ -1,0 +1,19 @@
+image: node:v10.22.0
+
+stages:
+  - test
+  - pages
+
+test:
+  stage: test
+  script: npm install
+    npm run test
+  artifacts:
+    paths:
+      - test
+# pages:
+#   stage:  pages
+
+#   artifacts:
+#     paths:
+#       - mv builds/tree/dev/coverage/* public/coverage
