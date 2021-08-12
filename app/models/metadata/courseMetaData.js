@@ -5,8 +5,15 @@
  * The course metadata class is implementing the ORM (Object relation mapping) for the 
  * synchronous mapping of data in the database. 
  */
-module.exports = class CourseMetaData {
+class CourseMetaData {
+
+    /**
+     * @constructor
+     */
     constructor() {
+        /**
+         * @property {string} tableName
+         */
         this.tableName = "course";
     }
 
@@ -20,3 +27,4 @@ module.exports = class CourseMetaData {
         this.courseCode = params['coursecode'];
     }
 }
+module.exports = CourseMetaData;

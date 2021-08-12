@@ -1,4 +1,3 @@
-/** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const requestInstance = autoload('request').getInstance();
 const viewManager = new (autoload('viewManager'));
@@ -10,7 +9,7 @@ const viewManager = new (autoload('viewManager'));
  * This class is also responsible for returning all the views for the specified 
  * controller and action.
  */
-module.exports = class RestController {
+class RestController {
 
     /**
      * Get the desired model.
@@ -159,3 +158,4 @@ module.exports = class RestController {
     }
 
 }
+module.exports = RestController;

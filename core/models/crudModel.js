@@ -1,4 +1,3 @@
-/** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const dbFactory = new (autoload('dbFactory'));
 
@@ -8,7 +7,7 @@ const dbFactory = new (autoload('dbFactory'));
  * the query and returning its results back. This class also handles the use of
  * driver instance which will run the query.
  */
-module.exports = class CRUDModel {
+class CRUDModel {
 
     /**
      * Returns the driver object of the specified database. 
@@ -108,3 +107,4 @@ module.exports = class CRUDModel {
         }
     }
 }
+module.exports = CRUDModel;

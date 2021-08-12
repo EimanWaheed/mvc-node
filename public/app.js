@@ -2,7 +2,7 @@
  * It is responsible for properly dispatching the request by invoking the dispatchRequest method of the Dispatch class.
  * This class is of primary purpose of dispatching the received request which is carried forwards using its runApp method. 
  */
-module.exports = class App {
+class App {
 
     /** 
     * Runs the application by invoking Dispatcher.
@@ -13,3 +13,4 @@ module.exports = class App {
         return (new (autoload('dispatcher'))).dispatchRequest();
     }
 }
+module.exports = App;

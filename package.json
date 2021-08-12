@@ -6,12 +6,14 @@
   "type": "commonjs",
   "scripts": {
     "test": "nyc qunit",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "cypress": "^8.2.0",
     "domino": "^2.1.6",
     "jsdoc": "^3.6.7",
     "mustache": "^4.2.0",

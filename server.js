@@ -1,4 +1,3 @@
-/** Acquiring modules. */
 require('./config');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const http = require('http');

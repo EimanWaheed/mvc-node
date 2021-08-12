@@ -1,4 +1,3 @@
-/** Acquire Autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 
 /** Class representing dispatcher which is responsbible for getting the required 
@@ -7,7 +6,7 @@ const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
  * which returns the required controller object. It then dispatches the controller and 
  * action from request to the specified method. 
  */
-module.exports = class Dispatcher {
+class Dispatcher {
 
     /** Fetches the request instance, get the controller name and action, check if
      * controller is available or not and then creates the controller object by 
@@ -26,3 +25,4 @@ module.exports = class Dispatcher {
         return (new (autoload('controllerFactory'))).createController(controllerName).performAction(controllerName, actionName);
     }
 }
+module.exports = Dispatcher;

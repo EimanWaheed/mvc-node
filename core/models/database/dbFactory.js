@@ -5,7 +5,7 @@
  * creating desired objects polymorphically. The object made is defined already and thus the required instance 
  * is returned.
  */
-module.exports = class DbFactory {
+class DbFactory {
 
     /**
      * Creates the driver of database type specified in the environment variable and returns it which is 
@@ -39,3 +39,4 @@ module.exports = class DbFactory {
         }
     }
 }
+module.exports = DbFactory;

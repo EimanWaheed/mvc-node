@@ -1,7 +1,7 @@
-const StudentMetaData = require("../app/models/metadata/studentMetaData");
-
 /**
- * Autoload function takes module name as an input, loads it and returns the object.
+ * Autoload function that takes file name as an input, loads it and returns the class. This function is
+ * responsible for requiring classes based on the moduleName specified as the key which returns the value
+ * against the class name specified.
  * @param {string} moduleName 
  */
 function autoload(moduleName) {

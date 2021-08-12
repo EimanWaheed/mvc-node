@@ -2,7 +2,7 @@
  * specified model object. Factory Design Pattern is used in this class for creating desired objects
  * polymorphically. The object made is defined already and thus the required instance is returned.
  */
-module.exports = class ModelFactory {
+class ModelFactory {
 
     /**
     * Creates model of type specified by getting the modelName specified as a parameter
@@ -21,5 +21,5 @@ module.exports = class ModelFactory {
         }
     }
 }
-
+module.exports = ModelFactory;
 

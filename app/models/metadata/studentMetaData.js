@@ -5,8 +5,15 @@
  * The student metadata class is implementing the ORM (Object relation mapping) for the 
  * synchronous mapping of data in the database. 
  */
-module.exports = class StudentMetaData {
+class StudentMetaData {
+
+    /**
+     * @constructor
+     */
     constructor() {
+        /**
+         * @property {string} tableName
+         */
         this.tableName = "student";
     }
 
@@ -21,3 +28,4 @@ module.exports = class StudentMetaData {
         this.email = params['email'];
     }
 }
+module.exports = StudentMetaData;

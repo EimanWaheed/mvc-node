@@ -5,8 +5,15 @@
  * The teacher metadata class is implementing the ORM (Object relation mapping) for the 
  * synchronous mapping of data in the database. 
  */
-module.exports = class TeacherMetaData {
+class TeacherMetaData {
+
+    /**
+     * @constructor
+     */
     constructor() {
+        /**
+         * @property {string} tableName
+         */
         this.tableName = "teacher";
     }
 
@@ -21,3 +28,4 @@ module.exports = class TeacherMetaData {
         this.email = params['email'];
     }
 }
+module.exports = TeacherMetaData;

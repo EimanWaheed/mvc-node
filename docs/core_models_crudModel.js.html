@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: core/models/crudModel.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: core/models/crudModel.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const dbFactory = new (autoload('dbFactory'));
+
+/** Class representing CRUD operations which will be responsible for creating,
+ * updating, deleting and listing records. These CRUD operations are perfomed
+ * for the specific model and thus querybuilder is responsible for generating
+ * the query and returning its results back. This class also handles the use of
+ * driver instance which will run the query.
+ */
+class CRUDModel {
+
+    /**
+     * Returns the driver object of the specified database. 
+     * @return {object} Driver object.
+     */
+    /* istanbul ignore next */
+    getDriver() {
+        return dbFactory.loadDriver();
+    }
+
+    /**
+     * Returns the querybuilder object of the specified database. 
+     * @return {object} QueryBuilder object.
+     */
+    /* istanbul ignore next */
+    getQueryBuilder() {
+        return dbFactory.loadQueryBuilder();
+    }
+
+    /**
+     * Returns the entity object. 
+     * @return {object} Entity object.
+     */
+    /* istanbul ignore next */
+    getEntity() {
+        return this.entity;
+    }
+    /**
+     * Initialises the metadata of respective model as it takes params as a 
+     * parameter, gets the querybuilder and driver instance by invoking getter
+     * and setter for each of them which will generate the insert query and 
+     * execute it respectively.
+     * @param {object} params 
+     */
+    create(params) {
+        try {
+            this.getEntity().setEntity(params);
+            let queryString = this.getQueryBuilder().create(this.entity);
+            return (this.getDriver().runQuery(queryString));
+        }
+        catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    /**
+     * Initialises the metadata of respective model as it takes params as a 
+     * parameter, gets the querybuilder and driver instance by invoking getter
+     * and setter for each of them which will generate the update query and 
+     * execute it respectively.
+     * @param {object} params 
+     */
+    update(params) {
+        try {
+            this.getEntity().setEntity(params);
+            let queryString = this.getQueryBuilder().update(this.entity);
+            return (this.getDriver().runQuery(queryString));
+        }
+        catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    /**
+     * Initialises the metadata of respective model as it takes params as a 
+     * parameter, gets the querybuilder and driver instance by invoking getter
+     * and setter for each of them which will generate the select query and 
+     * execute it respectively.
+     * @param {object} params 
+     */
+    list(params) {
+        try {
+            this.getEntity().setEntity(params);
+            let queryString = this.getQueryBuilder().list(this.entity);
+            return (this.getDriver().runQuery(queryString));
+        }
+        catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    /**
+     * Initialises the metadata of respective model as it takes params as a 
+     * parameter, gets the querybuilder and driver instance by invoking getter
+     * and setter for each of them which will generate the delete query and 
+     * execute it respectively.
+     * @param {object} params 
+     */
+    delete(params) {
+        try {
+            this.getEntity().setEntity(params);
+            let queryString = this.getQueryBuilder().delete(this.entity);
+            return (this.getDriver().runQuery(queryString));
+        }
+        catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+module.exports = CRUDModel;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ControllerFactory.html">ControllerFactory</a></li><li><a href="CourseController.html">CourseController</a></li><li><a href="CourseMetaData.html">CourseMetaData</a></li><li><a href="CourseModel.html">CourseModel</a></li><li><a href="CRUDModel.html">CRUDModel</a></li><li><a href="DbFactory.html">DbFactory</a></li><li><a href="DefaultController.html">DefaultController</a></li><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="Driver.html">Driver</a></li><li><a href="ModelFactory.html">ModelFactory</a></li><li><a href="QueryBuilder.html">QueryBuilder</a></li><li><a href="Request.html">Request</a></li><li><a href="Response.html">Response</a></li><li><a href="RestController.html">RestController</a></li><li><a href="StudentController.html">StudentController</a></li><li><a href="StudentMetaData.html">StudentMetaData</a></li><li><a href="StudentModel.html">StudentModel</a></li><li><a href="TeacherController.html">TeacherController</a></li><li><a href="TeacherMetaData.html">TeacherMetaData</a></li><li><a href="TeacherModel.html">TeacherModel</a></li><li><a href="ViewManager.html">ViewManager</a></li></ul><h3>Global</h3><ul><li><a href="global.html#autoload">autoload</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Aug 12 2021 17:02:55 GMT+0500 (Pakistan Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

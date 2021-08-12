@@ -1,11 +1,10 @@
-/** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const mustache = require('mustache');
 /** Class representing View Manager which is responsible for loading view and setting the key for rendering the data.
  * It loads all the views that are present, renders them and displays them on the screen. For the purpose of setting 
  * the data from database dynamically, it makes use of the Mustache.js and renders the data and make it available.
  */
-module.exports = class ViewManager {
+class ViewManager {
 
     /**
      * Loads the views specified in the controllerName and actionName for student, course,
@@ -39,3 +38,4 @@ module.exports = class ViewManager {
         this.templateKey.data = result;
     }
 }
+module.exports = ViewManager;
