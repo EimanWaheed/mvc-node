@@ -21,4 +21,4 @@ pages:
     - mv * ../public/coverage
   artifacts:
     paths:
-      - public/coverage
+      - public
