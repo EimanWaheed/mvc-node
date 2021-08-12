@@ -2,7 +2,7 @@ image: node
 
 stages:
   - test
-  - pages
+  - deploy
 
 test:
   stage: test
@@ -12,3 +12,13 @@ test:
   artifacts:
     paths:
       - coverage
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public/coverage
+    - cd coverage
+    - mv * public/coverage/
+  artifacts:
+    paths:
+      - public
