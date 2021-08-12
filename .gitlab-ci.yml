@@ -10,7 +10,7 @@ test:
     npm run test
   artifacts:
     paths:
-      - test
+      - .test
 # pages:
 #   stage:  pages
 
