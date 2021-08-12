@@ -18,7 +18,7 @@ pages:
   script:
     - mkdir public/coverage
     - cd coverage
-    - mv * /public/coverage
+    - mv * ../public/coverage
   artifacts:
     paths:
-      - public
+      - public/coverage
