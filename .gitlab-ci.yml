@@ -16,9 +16,9 @@ test:
 pages:
   stage: deploy
   script:
-    - mkdir public/coverage
+    - mkdir /public/coverage
     - cd coverage
-    - mv * /public/coverage
+    # - mv * /public/coverage
   artifacts:
     paths:
       - public
