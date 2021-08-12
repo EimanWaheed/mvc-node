@@ -2,7 +2,7 @@ image: node
 
 stages:
   - test
-  - docs
+  - jsdoc
   - deploy
 
 test:
@@ -14,8 +14,8 @@ test:
     paths:
       - coverage
 
-docs:
-  stage: docs
+jsdoc:
+  stage: jsdoc
   script:
     - npm install
     - npm run doc
