@@ -30,7 +30,7 @@ pages:
     - mkdir public/docs
     - cd coverage
     - mv * ../public/coverage
-    - cd docs
+    - cd ../../docs
     - mv * ../public/coverage
   artifacts:
     paths:
