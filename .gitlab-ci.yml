@@ -2,6 +2,7 @@ image: node
 
 stages:
   - test
+  - docs
   - deploy
 
 test:
@@ -12,6 +13,15 @@ test:
   artifacts:
     paths:
       - coverage
+
+docs:
+  stage: docs
+  script:
+    - npm install
+    - npm run doc
+  artifacts:
+    paths:
+      - docs
 
 pages:
   stage: deploy
