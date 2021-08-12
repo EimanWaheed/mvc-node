@@ -27,6 +27,7 @@ pages:
   stage: deploy
   script:
     - mkdir public/coverage
+    - mkdir public/docs
     - cd coverage
     - mv * ../public/coverage
   artifacts:
