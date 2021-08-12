@@ -1,4 +1,4 @@
-image: node:v10.22.0
+image: node
 
 stages:
   - test
@@ -8,7 +8,7 @@ test:
   stage: test
   script:
     - npm install
-    - npm test
+    - npm run test
   artifacts:
     paths:
       - test
