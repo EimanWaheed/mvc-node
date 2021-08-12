@@ -11,10 +11,4 @@ test:
     - npm run test
   artifacts:
     paths:
-      - test
-# pages:
-#   stage:  pages
-
-#   artifacts:
-#     paths:
-#       - mv builds/tree/dev/coverage/* public/coverage
+      - coverage
