@@ -6,11 +6,12 @@ stages:
 
 test:
   stage: test
-  script: npm install
-    npm run test
+  script:
+    - npm install
+    - npm run test
   artifacts:
     paths:
-      - .test
+      - test
 # pages:
 #   stage:  pages
 
