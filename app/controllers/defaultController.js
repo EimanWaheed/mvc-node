@@ -7,8 +7,13 @@ const RestController = autoload('RestController');
  * based on the action. Default controller is extending RestController which explicitly inherits
  * all of the CRUD operations thus ensuring the reusability.
  */
-module.exports = class defaultController extends RestController {
+class DefaultController extends RestController {
+
+    /**
+     * @constructor
+     */
     constructor() {
         super();
     }
 }
+module.exports = DefaultController;

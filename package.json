@@ -5,16 +5,22 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "nyc qunit",
+    "start": "nodemon server.js",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "cypress": "^8.2.0",
     "domino": "^2.1.6",
+    "jsdoc": "^3.6.7",
     "mustache": "^4.2.0",
     "nodemon": "^2.0.12",
+    "nyc": "^15.1.0",
+    "qunit": "^2.16.0",
+    "sinon": "^11.1.2",
     "sync-mysql": "^3.0.1",
     "sync-mysql-database": "^2.3.4"
   },

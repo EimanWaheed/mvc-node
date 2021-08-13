@@ -7,8 +7,13 @@ const RestController = autoload('RestController');
  * based on the action. Teacher controller is extending RestController which explicitly inherits
  * all of the CRUD operations thus ensuring the reusability.
  */
-module.exports = class teacherController extends RestController {
+class TeacherController extends RestController {
+
+    /**
+     * @constructor
+     */
     constructor() {
         super();
     }
 }
+module.exports = TeacherController;

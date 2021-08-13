@@ -8,7 +8,7 @@ const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
  * This class is responsible for generating and building the queries dynamically for
  * the purpose of further executing it.
  */
-module.exports = class QueryBuilder {
+class QueryBuilder {
 
     /**
      * Forms the insert sql query for inserting records in database. The query is
@@ -76,3 +76,4 @@ module.exports = class QueryBuilder {
         return (`SELECT * FROM ${entity.tableName}`);
     }
 }
+module.exports = QueryBuilder;

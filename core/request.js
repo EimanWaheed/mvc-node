@@ -1,4 +1,3 @@
-/** Acquiring the modules. */
 const url = require('url');
 const queryString = require('querystring');
 
@@ -9,7 +8,7 @@ const queryString = require('querystring');
  * is made singleton using Singleton Design Pattern. 
  */
 
-module.exports = class Request {
+class Request {
 
     /**
      * Get the singleton instance of the Request class.
@@ -70,3 +69,4 @@ module.exports = class Request {
         });
     }
 }
+module.exports = Request;

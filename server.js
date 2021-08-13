@@ -1,4 +1,3 @@
-/** Acquiring modules. */
 require('./config');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
 const http = require('http');
@@ -13,7 +12,7 @@ const http = require('http');
  */
 http.createServer(function (req, res) {
   const request = autoload('request');
-  const app = autoload('app');
+  const app = new (autoload('app'));
   const requestInstance = request.getInstance();
   requestInstance.initialiseRequest(req, () => {
     let response = app.runApp();

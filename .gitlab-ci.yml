@@ -1,0 +1,37 @@
+image: node
+
+stages:
+  - test
+  - jsdoc
+  - deploy
+
+test:
+  stage: test
+  script:
+    - npm install
+    - npm run test
+  artifacts:
+    paths:
+      - coverage
+
+jsdoc:
+  stage: jsdoc
+  script:
+    - npm install
+    - npm run doc
+  artifacts:
+    paths:
+      - docs
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public/coverage
+    - mkdir public/docs
+    - cd coverage
+    - mv * ../public/coverage
+    - cd ../docs
+    - mv * ../public/docs
+  artifacts:
+    paths:
+      - public

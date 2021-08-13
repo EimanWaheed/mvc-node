@@ -1,7 +1,6 @@
-/** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const modelFactory = autoload('modelFactory');
-const viewManager = autoload('viewManager');
+const requestInstance = autoload('request').getInstance();
+const viewManager = new (autoload('viewManager'));
 
 /** Class representing CRUD operations which will be responsible for generating 
  * model object and returning the views for create, delete, list , update and default. 
@@ -10,8 +9,27 @@ const viewManager = autoload('viewManager');
  * This class is also responsible for returning all the views for the specified 
  * controller and action.
  */
-module.exports = class RestController {
+class RestController {
 
+    /**
+     * Get the desired model.
+     * @param {string} controllerName 
+     */
+    /* istanbul ignore next */
+    getModel(controllerName) {
+        return (new (autoload('modelFactory'))).createModel(controllerName);
+    }
+
+    /**
+     * Get the desired view.
+     * @param {string} controllerName 
+     * @param {string} actionName 
+     */
+    /* istanbul ignore next */
+    getView(controllerName, actionName) {
+
+        return viewManager.loadView(controllerName, actionName);
+    }
     /**
      * Initialises the model object of the type specified in the request by 
      * invoking the createModel method of the modelFactory, as the object is 
@@ -23,11 +41,12 @@ module.exports = class RestController {
      */
     create(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
+            const params = requestInstance.getParams();
             if (Object.keys(params).length != 0) {
-                modelFactory.createModel(controllerName).create(params);
+                const modelObj = this.getModel(controllerName);
+                modelObj.create(params);
             }
-            return viewManager.loadView(controllerName, actionName);
+            return this.getView(controllerName, actionName);
         }
         catch (error) {
             throw new Error(error);
@@ -45,11 +64,12 @@ module.exports = class RestController {
      */
     update(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
+            const params = requestInstance.getParams();
             if (Object.keys(params).length != 0) {
-                modelFactory.createModel(controllerName).update(params);
+                const modelObj = this.getModel(controllerName);
+                modelObj.update(params);
             }
-            return viewManager.loadView(controllerName, actionName);
+            return this.getView(controllerName, actionName);
         }
         catch (error) {
             throw new Error(error);
@@ -67,10 +87,11 @@ module.exports = class RestController {
      */
     list(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
-            let result = modelFactory.createModel(controllerName).list(params);
+            const params = requestInstance.getParams();
+            const modelObj = this.getModel(controllerName);
+            let result = modelObj.list(params);
             viewManager.setData(result);
-            return viewManager.loadView(controllerName, `${actionName}Data`);
+            return this.getView(controllerName, `${actionName}Data`);
         }
         catch (error) {
             throw new Error(error);
@@ -89,11 +110,12 @@ module.exports = class RestController {
      */
     delete(controllerName, actionName) {
         try {
-            const params = autoload('request').getInstance().getParams();
+            const params = requestInstance.getParams();
             if (Object.keys(params).length != 0) {
-                modelFactory.createModel(controllerName).delete(params);
+                const modelObj = this.getModel(controllerName);
+                modelObj.delete(params);
             }
-            return viewManager.loadView(controllerName, actionName);
+            return this.getView(controllerName, actionName);
         }
         catch (error) {
             throw new Error(error);
@@ -109,7 +131,7 @@ module.exports = class RestController {
      */
     defaultView(controllerName, actionName) {
         try {
-            return viewManager.loadView(controllerName, 'defaultView');
+            return this.getView(controllerName, 'defaultView');
         }
         catch (error) {
             throw new Error(error);
@@ -122,6 +144,7 @@ module.exports = class RestController {
      * the CRUD operation by dynamically making the function call.
      * @param {string} controllerName 
      */
+    /* istanbul ignore next */
     performAction(controllerName, actionName) {
         try {
             if (!actionName) {
@@ -135,3 +158,4 @@ module.exports = class RestController {
     }
 
 }
+module.exports = RestController;

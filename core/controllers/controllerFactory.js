@@ -3,7 +3,7 @@
  * specified controller object. Factory Design Pattern is used in this class for creating desired objects
  * polymorphically. The object made is defined already and thus the required instance is returned.
  */
-module.exports = class controllerFactory {
+class ControllerFactory {
 
     /**
     * Creates controller of type specified by getting the controllerName specified 
@@ -22,3 +22,4 @@ module.exports = class controllerFactory {
         }
     }
 }
+module.exports = ControllerFactory;

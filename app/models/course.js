@@ -7,10 +7,15 @@ const crudModel = autoload('crudModel');
 * extending CrudModel which explicitly inherits all of the CRUD operations thus ensuring the 
 * reusability. The property of course model will make it easy to access its metadata.
 */
-module.exports = class CourseModel extends crudModel {
+class CourseModel extends crudModel {
+    /**
+     * @constructor
+     * @property {Object} courseMetaData
+     */
     constructor() {
         super();
         const courseMetaData = autoload('courseMetaData');
         this.entity = new courseMetaData();
     }
 }
+module.exports = CourseModel;

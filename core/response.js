@@ -3,7 +3,7 @@
  * the property of the response instance. The significance of this class lies in setting and 
  * getting the response data which will be mandatory for displaying the data to the screen.
  */
-module.exports = class Response {
+class Response {
 
     /**
      * Sets the html data.
@@ -21,3 +21,4 @@ module.exports = class Response {
         return this.htmlResponse;
     }
 }
+module.exports = Response;

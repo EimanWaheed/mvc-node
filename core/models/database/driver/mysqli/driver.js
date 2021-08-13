@@ -6,8 +6,12 @@ const mySql = require("sync-mysql");
 * database so the instance of this class is made singleton using Singleton Design Pattern. Furthermore, this class is 
 * responsible for running the query after building the connection. 
 */
-module.exports = class Driver {
+class Driver {
 
+    /**
+     * @constructor
+     * @property {Object} connection.
+     */
     constructor() {
         this.connection = new mySql({
             host: "localhost",
@@ -52,3 +56,4 @@ module.exports = class Driver {
         }
     }
 }
+module.exports = Driver;

@@ -1,6 +1,5 @@
-/** Acquiring autoloader. */
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const dbFactory = autoload('dbFactory');
+const dbFactory = new (autoload('dbFactory'));
 
 /** Class representing CRUD operations which will be responsible for creating,
  * updating, deleting and listing records. These CRUD operations are perfomed
@@ -8,12 +7,13 @@ const dbFactory = autoload('dbFactory');
  * the query and returning its results back. This class also handles the use of
  * driver instance which will run the query.
  */
-module.exports = class CRUDModel {
+class CRUDModel {
 
     /**
      * Returns the driver object of the specified database. 
      * @return {object} Driver object.
      */
+    /* istanbul ignore next */
     getDriver() {
         return dbFactory.loadDriver();
     }
@@ -22,10 +22,19 @@ module.exports = class CRUDModel {
      * Returns the querybuilder object of the specified database. 
      * @return {object} QueryBuilder object.
      */
+    /* istanbul ignore next */
     getQueryBuilder() {
         return dbFactory.loadQueryBuilder();
     }
 
+    /**
+     * Returns the entity object. 
+     * @return {object} Entity object.
+     */
+    /* istanbul ignore next */
+    getEntity() {
+        return this.entity;
+    }
     /**
      * Initialises the metadata of respective model as it takes params as a 
      * parameter, gets the querybuilder and driver instance by invoking getter
@@ -35,9 +44,9 @@ module.exports = class CRUDModel {
      */
     create(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().create(this.entity);
-            this.getDriver().runQuery(queryString);
+            return (this.getDriver().runQuery(queryString));
         }
         catch (error) {
             throw new Error(error);
@@ -53,9 +62,9 @@ module.exports = class CRUDModel {
      */
     update(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().update(this.entity);
-            this.getDriver().runQuery(queryString);
+            return (this.getDriver().runQuery(queryString));
         }
         catch (error) {
             throw new Error(error);
@@ -71,7 +80,7 @@ module.exports = class CRUDModel {
      */
     list(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().list(this.entity);
             return (this.getDriver().runQuery(queryString));
         }
@@ -89,12 +98,13 @@ module.exports = class CRUDModel {
      */
     delete(params) {
         try {
-            this.entity.setEntity(params);
+            this.getEntity().setEntity(params);
             let queryString = this.getQueryBuilder().delete(this.entity);
-            this.getDriver().runQuery(queryString);
+            return (this.getDriver().runQuery(queryString));
         }
         catch (error) {
             throw new Error(error);
         }
     }
 }
+module.exports = CRUDModel;
