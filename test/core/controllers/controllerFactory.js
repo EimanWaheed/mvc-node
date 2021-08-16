@@ -11,7 +11,7 @@ QUnit.module("Controller Factory", function (assert) {
     /** Controller Factory exception case */
     QUnit.test('Exception controller', function (assert) {
         assert.throws(function () {
-            (new (autoload('controllerFactory'))).createController('books');
+            return ((new (autoload('controllerFactory'))).createController('books'));
         });
     });
 });
