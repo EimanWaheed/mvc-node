@@ -15,14 +15,18 @@ class Dispatcher {
      */
     dispatchRequest() {
 
-        /** Check the availibility of controller. */
-        let requestInstance = autoload('request').getInstance();
-        let controllerName = requestInstance.getController();
-        let actionName = requestInstance.getAction();
-        if (!controllerName) {
-            controllerName = 'default';
+        try {
+            let requestInstance = autoload('request').getInstance();
+            let controllerName = requestInstance.getController();
+            let actionName = requestInstance.getAction();
+            if (!controllerName) {
+                controllerName = 'default';
+            }
+            return (new (autoload('controllerFactory'))).createController(controllerName).performAction(controllerName, actionName);
         }
-        return (new (autoload('controllerFactory'))).createController(controllerName).performAction(controllerName, actionName);
+        catch (error) {
+            return (new (require(`${process.env.FILEPATH}/app/controllers/errorController.js`))).displayError();
+        }
     }
 }
 module.exports = Dispatcher;
