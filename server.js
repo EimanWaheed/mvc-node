@@ -10,16 +10,16 @@ const http = require('http');
  * @param {string} req
  * @param {string} res
  */
-http.createServer(function (req, res) {
-  const request = autoload('request');
-  const app = new (autoload('app'));
-  const requestInstance = request.getInstance();
-  requestInstance.initialiseRequest(req, () => {
-    let response = app.runApp();
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(response.getContent());
-    res.end();
-  });
+let serverConnection = http.createServer(function (req, res) {
+    const request = autoload('request');
+    const app = new (autoload('app'));
+    const requestInstance = request.getInstance();
+    requestInstance.initialiseRequest(req, () => {
+        let response = app.runApp();
+        res.writeHead(response.getStatusCode(), { 'Content-Type': response.getContentType() });
+        res.write(response.getContent());
+        res.end();
+    });
 
-}).listen(3000);
-
+})
+serverConnection.listen(3000);
