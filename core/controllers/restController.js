@@ -14,6 +14,7 @@ class RestController {
     /**
      * Get the desired model.
      * @param {string} controllerName 
+     * @returns {Object} model object.
      */
     /* istanbul ignore next */
     getModel(controllerName) {
@@ -24,6 +25,7 @@ class RestController {
      * Get the desired view.
      * @param {string} controllerName 
      * @param {string} actionName 
+     * @returns {Object} response object.
      */
     /* istanbul ignore next */
     getView(controllerName, actionName) {
@@ -38,6 +40,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     create(controllerName, actionName) {
         try {
@@ -61,6 +64,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     update(controllerName, actionName) {
         try {
@@ -84,6 +88,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     list(controllerName, actionName) {
         try {
@@ -107,6 +112,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     delete(controllerName, actionName) {
         try {
@@ -128,6 +134,7 @@ class RestController {
      * the grounds of controller name and action which are received as params
      * of the method.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     defaultView(controllerName, actionName) {
         try {
@@ -143,6 +150,7 @@ class RestController {
      * decides which CRUD operation to call for the controller and thus invokes
      * the CRUD operation by dynamically making the function call.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     /* istanbul ignore next */
     performAction(controllerName, actionName) {
