@@ -20,5 +20,37 @@ class Response {
     getContent() {
         return this.htmlResponse;
     }
+
+    /**
+     * Sets the status code for writing data.
+     * @param {number} statusCode 
+     */
+    setStatusCode(statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    /**
+     * Gets the status code.
+     * @returns {number} The status code.
+     */
+    getStatusCode() {
+        return this.statusCode;
+    }
+
+    /**
+     * Sets the content type for writing data.
+     * @param {string} contentType
+     */
+    setContentType(contentType) {
+        this.contentType = contentType;
+    }
+
+    /**
+     * Gets the content type.
+     * @returns {number} The content type.
+     */
+    getContentType() {
+        return this.contentType;
+    }
 }
 module.exports = Response;
