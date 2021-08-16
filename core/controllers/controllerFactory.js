@@ -12,6 +12,7 @@ class ControllerFactory {
     * handling is also done in the case if the controller is not created due to some reasons,
     * just throw the error specifying the problem message.
     * @param {string} controllerName 
+    * @returns {Object} controller object.
     */
     createController(controllerName) {
         try {
