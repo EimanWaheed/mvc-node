@@ -11,6 +11,7 @@ class ModelFactory {
     * handling is also done in the case if the model is not created due to some 
     * reasons,just throw the error specifying the problem message.
     * @param {string} modelName 
+    * @returns {Object} model object.
     */
     createModel(modelName) {
         try {
