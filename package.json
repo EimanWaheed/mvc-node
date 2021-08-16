@@ -7,7 +7,8 @@
   "scripts": {
     "test": "nyc qunit",
     "start": "nodemon server.js",
-    "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json",
+    "cytest": "cypress open"
   },
   "author": "",
   "license": "ISC",
