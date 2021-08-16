@@ -21,6 +21,8 @@ class ViewManager {
             const response = new (autoload('response'));
             const htmlData = fs.readFileSync(`${process.env.FILEPATH}/app/views/${controllerName}/${actionName}.html`, 'utf-8');
             const viewString = mustache.render(htmlData, this.templateKey);
+            response.setStatusCode(200);
+            response.setContentType('text/html');
             response.setContent(viewString);
             return response;
         }
