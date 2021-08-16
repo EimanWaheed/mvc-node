@@ -41,6 +41,7 @@ class CRUDModel {
      * and setter for each of them which will generate the insert query and 
      * execute it respectively.
      * @param {object} params 
+     * @returns {Object} query object.
      */
     create(params) {
         try {
@@ -59,6 +60,7 @@ class CRUDModel {
      * and setter for each of them which will generate the update query and 
      * execute it respectively.
      * @param {object} params 
+     * @returns {Object} query object.
      */
     update(params) {
         try {
@@ -77,6 +79,7 @@ class CRUDModel {
      * and setter for each of them which will generate the select query and 
      * execute it respectively.
      * @param {object} params 
+     * @returns {Object} query object.
      */
     list(params) {
         try {
@@ -95,6 +98,7 @@ class CRUDModel {
      * and setter for each of them which will generate the delete query and 
      * execute it respectively.
      * @param {object} params 
+     * @returns {Object} query object.
      */
     delete(params) {
         try {
