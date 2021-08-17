@@ -1,7 +1,5 @@
 require('./config');
 const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
-//autoload.getFileName();
-//autoload.getAllFiles(process.env.PWD);
 const http = require('http');
 
 /** 
