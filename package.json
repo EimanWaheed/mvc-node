@@ -21,9 +21,11 @@
     "nodemon": "^2.0.12",
     "nyc": "^15.1.0",
     "qunit": "^2.16.0",
+    "recursive-readdir": "^2.2.2",
     "sinon": "^11.1.2",
     "sync-mysql": "^3.0.1",
-    "sync-mysql-database": "^2.3.4"
+    "sync-mysql-database": "^2.3.4",
+    "wrench": "^1.5.9"
   },
   "devDependencies": {}
 }

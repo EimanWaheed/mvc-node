@@ -1,8 +1,8 @@
 const sinon = require('sinon');
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
 
 QUnit.module("CRUD Model", function (hooks) {
-    const crudModel = new (autoload('crudModel'));
+    const crudModel = new (autoload.getFileName('crudModel'));
     let entityStub = "", driverStub = "", querybuilderStub = "";
     const paramsObj = {
         "id": 5,

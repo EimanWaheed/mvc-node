@@ -9,8 +9,8 @@ class App {
     * @returns {Object} response.
     */
     runApp() {
-        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-        return (new (autoload('dispatcher'))).dispatchRequest();
+        const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+        return (new (autoload.getFileName('dispatcher'))).dispatchRequest();
     }
 }
 module.exports = App;

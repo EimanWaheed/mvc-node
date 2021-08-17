@@ -1,5 +1,5 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const dbFactory = new (autoload('dbFactory'));
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const dbFactory = new (autoload.getFileName('dbFactory'));
 
 /** Class representing CRUD operations which will be responsible for creating,
  * updating, deleting and listing records. These CRUD operations are perfomed

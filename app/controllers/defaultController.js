@@ -1,5 +1,5 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const RestController = autoload('RestController');
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const RestController = autoload.getFileName('restController');
 
 /**
  * Class representing default controller which is responsible for identifying the controller

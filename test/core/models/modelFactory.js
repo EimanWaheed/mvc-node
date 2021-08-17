@@ -1,8 +1,8 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
 
 QUnit.module("Model Factory", function (assert) {
-    const modelFactory = autoload('modelFactory');
-    const actualObject = (new (autoload('modelFactory'))).createModel('student');
+    const modelFactory = autoload.getFileName('modelFactory');
+    const actualObject = (new (autoload.getFileName('modelFactory'))).createModel('student');
     const expectedObject = new (require(`${process.env.FILEPATH}/app/models/student.js`))
     /** Model Factory success case */
     QUnit.test('correct controller', function (assert) {
@@ -11,7 +11,7 @@ QUnit.module("Model Factory", function (assert) {
     /** Model Factory exception case */
     QUnit.test('Exception controller', function (assert) {
         assert.throws(function () {
-            (new (autoload('modelFactory'))).createModel('books');
+            (new (autoload.getFileName('modelFactory'))).createModel('books');
         });
     });
 });

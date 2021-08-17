@@ -1,6 +1,5 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const RestController = autoload('RestController');
-const viewManager = new (autoload('viewManager'));
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const viewManager = new (autoload.getFileName('viewManager'));
 
 /**
  * Class representing error controller which is responsible for representing the controller

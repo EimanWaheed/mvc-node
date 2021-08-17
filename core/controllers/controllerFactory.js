@@ -1,3 +1,4 @@
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
 /** 
  * Class representing the factory for building specified controller. It is responsible for building the
  * specified controller object. Factory Design Pattern is used in this class for creating desired objects
@@ -16,7 +17,7 @@ class ControllerFactory {
     */
     createController(controllerName) {
         try {
-            return new (require(`${process.env.FILEPATH}/app/controllers/${controllerName}Controller.js`));
+            return (new (autoload.getFileName(`${controllerName}Controller`)));
         }
         catch (error) {
             throw new Error(`${controllerName} object not created.`);

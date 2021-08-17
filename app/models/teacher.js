@@ -1,5 +1,5 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const crudModel = autoload('crudModel');
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const crudModel = autoload.getFileName('crudModel');
 
 /** 
 * Class representing teacher model which has the property of entity having all the metadata in
@@ -14,7 +14,7 @@ class TeacherModel extends crudModel {
      */
     constructor() {
         super();
-        const teacherMetaData = autoload('teacherMetaData');
+        const teacherMetaData = autoload.getFileName('teacherMetaData');
         this.entity = new teacherMetaData();
     }
 }

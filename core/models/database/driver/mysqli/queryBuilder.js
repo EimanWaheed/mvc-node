@@ -1,5 +1,3 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-
 /**
  * Class representing CRUD operations which will be responsible for generating 
  * sql queries and returning them for all the CRUD operations i.e, create, delete,

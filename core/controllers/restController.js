@@ -1,6 +1,6 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const requestInstance = autoload('request').getInstance();
-const viewManager = new (autoload('viewManager'));
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const requestInstance = (autoload.getFileName('request')).getInstance();
+const viewManager = new (autoload.getFileName('viewManager'));
 
 /** Class representing CRUD operations which will be responsible for generating 
  * model object and returning the views for create, delete, list , update and default. 
@@ -18,7 +18,7 @@ class RestController {
      */
     /* istanbul ignore next */
     getModel(controllerName) {
-        return (new (autoload('modelFactory'))).createModel(controllerName);
+        return (new (autoload.getFileName('modelFactory'))).createModel(controllerName);
     }
 
     /**

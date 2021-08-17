@@ -1,7 +1,7 @@
 const sinon = require('sinon');
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const request = autoload('request').getInstance();
-const restController = new (autoload('RestController'));
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const request = autoload.getFileName('request').getInstance();
+const restController = new (autoload.getFileName('restController'));
 
 QUnit.module("Rest Controller", function (hooks) {
     let paramsStub = "", modelStub = "", viewStub = "";

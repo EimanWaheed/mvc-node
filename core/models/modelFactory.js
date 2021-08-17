@@ -1,3 +1,4 @@
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
 /** Class representing the factory for building specified model. It is responsible for building the
  * specified model object. Factory Design Pattern is used in this class for creating desired objects
  * polymorphically. The object made is defined already and thus the required instance is returned.
@@ -15,7 +16,7 @@ class ModelFactory {
     */
     createModel(modelName) {
         try {
-            return (new (require(`${process.env.FILEPATH}/app/models/${modelName}.js`)));
+            return new (autoload.getFileName(`${modelName}`));
         }
         catch (error) {
             throw new Error(`${modelName} object not created.`);
