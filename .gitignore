@@ -4,6 +4,6 @@ coverage/
 cypress/
 docs/
 .nyc_output/
-docs/
+jsdoc.json
 package-lock.json
 cypress.json
