@@ -11,17 +11,14 @@ const http = require('http');
  * @param {string} res
  */
 let serverConnection = http.createServer(function (req, res) {
-    //autoload.loadModulesFromDirectory(process.env.PWD).then(() => {
-        const request = autoload.getFileName('request');
-        const app = new (autoload.getFileName('app'));
-        // console.log(app);
-        const requestInstance = request.getInstance();
-        requestInstance.initialiseRequest(req, () => {
-            let response = app.runApp();
-            res.writeHead(response.getStatusCode(), { 'Content-Type': response.getContentType() });
-            res.write(response.getContent());
-            res.end();
-        });
-   // })
+    const request = autoload.getFileName('request');
+    const app = new (autoload.getFileName('app'));
+    const requestInstance = request.getInstance();
+    requestInstance.initialiseRequest(req, () => {
+        let response = app.runApp();
+        res.writeHead(response.getStatusCode(), { 'Content-Type': response.getContentType() });
+        res.write(response.getContent());
+        res.end();
+    });
 })
 serverConnection.listen(3000);
