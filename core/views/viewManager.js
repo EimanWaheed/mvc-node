@@ -1,4 +1,4 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
 const mustache = require('mustache');
 /** Class representing View Manager which is responsible for loading view and setting the key for rendering the data.
  * It loads all the views that are present, renders them and displays them on the screen. For the purpose of setting 
@@ -18,9 +18,11 @@ class ViewManager {
     loadView(controllerName, actionName) {
         try {
             const fs = require('fs');
-            const response = new (autoload('response'));
+            const response = new (autoload.getFileName('response'));
             const htmlData = fs.readFileSync(`${process.env.FILEPATH}/app/views/${controllerName}/${actionName}.html`, 'utf-8');
             const viewString = mustache.render(htmlData, this.templateKey);
+            response.setStatusCode(200);
+            response.setContentType('text/html');
             response.setContent(viewString);
             return response;
         }

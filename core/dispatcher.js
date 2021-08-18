@@ -1,4 +1,4 @@
-const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
+const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
 
 /** Class representing dispatcher which is responsbible for getting the required 
  * controller and invoking the performAction method for deciding the CRUD operation.
@@ -15,14 +15,18 @@ class Dispatcher {
      */
     dispatchRequest() {
 
-        /** Check the availibility of controller. */
-        let requestInstance = autoload('request').getInstance();
-        let controllerName = requestInstance.getController();
-        let actionName = requestInstance.getAction();
-        if (!controllerName) {
-            controllerName = 'default';
+        try {
+            let requestInstance = (autoload.getFileName('request')).getInstance();
+            let controllerName = requestInstance.getController();
+            let actionName = requestInstance.getAction();
+            if (!controllerName) {
+                controllerName = 'default';
+            }
+            return (new (autoload.getFileName('controllerFactory'))).createController(controllerName).performAction(controllerName, actionName);
         }
-        return (new (autoload('controllerFactory'))).createController(controllerName).performAction(controllerName, actionName);
+        catch (error) {
+            return (new (autoload.getFileName('errorController'))).displayError();
+        }
     }
 }
 module.exports = Dispatcher;

@@ -26,9 +26,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const autoload = require(`${process.env.FILEPATH}/core/autoload.js`);
-const requestInstance = autoload('request').getInstance();
-const viewManager = new (autoload('viewManager'));
+            <pre class="prettyprint source linenums"><code>const autoload = require(`${process.env.FILEPATH}/core/autoload.js`).getInstance();
+const requestInstance = (autoload.getFileName('request')).getInstance();
+const viewManager = new (autoload.getFileName('viewManager'));
 
 /** Class representing CRUD operations which will be responsible for generating 
  * model object and returning the views for create, delete, list , update and default. 
@@ -42,16 +42,18 @@ class RestController {
     /**
      * Get the desired model.
      * @param {string} controllerName 
+     * @returns {Object} model object.
      */
     /* istanbul ignore next */
     getModel(controllerName) {
-        return (new (autoload('modelFactory'))).createModel(controllerName);
+        return (new (autoload.getFileName('modelFactory'))).createModel(controllerName);
     }
 
     /**
      * Get the desired view.
      * @param {string} controllerName 
      * @param {string} actionName 
+     * @returns {Object} response object.
      */
     /* istanbul ignore next */
     getView(controllerName, actionName) {
@@ -66,6 +68,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     create(controllerName, actionName) {
         try {
@@ -89,6 +92,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     update(controllerName, actionName) {
         try {
@@ -112,6 +116,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     list(controllerName, actionName) {
         try {
@@ -135,6 +140,7 @@ class RestController {
      * next main task is to load the views for the specfied controller and 
      * action and return it.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     delete(controllerName, actionName) {
         try {
@@ -156,6 +162,7 @@ class RestController {
      * the grounds of controller name and action which are received as params
      * of the method.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     defaultView(controllerName, actionName) {
         try {
@@ -171,6 +178,7 @@ class RestController {
      * decides which CRUD operation to call for the controller and thus invokes
      * the CRUD operation by dynamically making the function call.
      * @param {string} controllerName 
+     * @returns {Object} response object.
      */
     /* istanbul ignore next */
     performAction(controllerName, actionName) {
@@ -196,13 +204,13 @@ module.exports = RestController;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ControllerFactory.html">ControllerFactory</a></li><li><a href="CourseController.html">CourseController</a></li><li><a href="CourseMetaData.html">CourseMetaData</a></li><li><a href="CourseModel.html">CourseModel</a></li><li><a href="CRUDModel.html">CRUDModel</a></li><li><a href="DbFactory.html">DbFactory</a></li><li><a href="DefaultController.html">DefaultController</a></li><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="Driver.html">Driver</a></li><li><a href="ModelFactory.html">ModelFactory</a></li><li><a href="QueryBuilder.html">QueryBuilder</a></li><li><a href="Request.html">Request</a></li><li><a href="Response.html">Response</a></li><li><a href="RestController.html">RestController</a></li><li><a href="StudentController.html">StudentController</a></li><li><a href="StudentMetaData.html">StudentMetaData</a></li><li><a href="StudentModel.html">StudentModel</a></li><li><a href="TeacherController.html">TeacherController</a></li><li><a href="TeacherMetaData.html">TeacherMetaData</a></li><li><a href="TeacherModel.html">TeacherModel</a></li><li><a href="ViewManager.html">ViewManager</a></li></ul><h3>Global</h3><ul><li><a href="global.html#autoload">autoload</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Autoload.html">Autoload</a></li><li><a href="ControllerFactory.html">ControllerFactory</a></li><li><a href="CourseController.html">CourseController</a></li><li><a href="CourseMetaData.html">CourseMetaData</a></li><li><a href="CourseModel.html">CourseModel</a></li><li><a href="CRUDModel.html">CRUDModel</a></li><li><a href="DbFactory.html">DbFactory</a></li><li><a href="DefaultController.html">DefaultController</a></li><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="Driver.html">Driver</a></li><li><a href="ErrorController.html">ErrorController</a></li><li><a href="ModelFactory.html">ModelFactory</a></li><li><a href="QueryBuilder.html">QueryBuilder</a></li><li><a href="Request.html">Request</a></li><li><a href="Response.html">Response</a></li><li><a href="RestController.html">RestController</a></li><li><a href="StudentController.html">StudentController</a></li><li><a href="StudentMetaData.html">StudentMetaData</a></li><li><a href="StudentModel.html">StudentModel</a></li><li><a href="TeacherController.html">TeacherController</a></li><li><a href="TeacherMetaData.html">TeacherMetaData</a></li><li><a href="TeacherModel.html">TeacherModel</a></li><li><a href="ViewManager.html">ViewManager</a></li></ul><h3>Global</h3><ul><li><a href="global.html#serverConnection">serverConnection</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Aug 12 2021 17:02:55 GMT+0500 (Pakistan Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Aug 17 2021 17:08:09 GMT+0500 (Pakistan Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
