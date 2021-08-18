@@ -1,0 +1,9 @@
+#Ignore folders and files
+node_modules/
+coverage/
+cypress/
+docs/
+.nyc_output/
+jsdoc.json
+package-lock.json
+cypress.json
