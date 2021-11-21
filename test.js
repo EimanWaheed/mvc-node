@@ -3,7 +3,9 @@
  */
 function testFunction(){
     console.log("Hello World");
-    console.log("HELLO WORLD");
+    console.log("another world quick-test");
+    console.log("another world quick-test-1 again");
+    console.log("HHEEHEHE");
 }
 
 /** Calling function. */
