@@ -3,7 +3,7 @@
  */
 function testFunction(){
     console.log("Hello World");
-    console.log("another world again");
+    console.log("HELLO WORLD");
 }
 
 /** Calling function. */
