@@ -6,6 +6,7 @@ function testFunction(){
     console.log("another world quick-test");
     console.log("another world MR");
     console.log("another world quick-test-1 again");
+    console.log("Hello Worlddd");
 }
 
 /** Calling function. */
